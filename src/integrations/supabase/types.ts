@@ -14,7 +14,163 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      itinerary_activities: {
+        Row: {
+          booking_link: string | null
+          created_at: string
+          day_id: string
+          description: string | null
+          estimated_cost: number | null
+          id: string
+          location: string | null
+          start_time: string | null
+          title: string
+          type: string
+        }
+        Insert: {
+          booking_link?: string | null
+          created_at?: string
+          day_id: string
+          description?: string | null
+          estimated_cost?: number | null
+          id?: string
+          location?: string | null
+          start_time?: string | null
+          title: string
+          type?: string
+        }
+        Update: {
+          booking_link?: string | null
+          created_at?: string
+          day_id?: string
+          description?: string | null
+          estimated_cost?: number | null
+          id?: string
+          location?: string | null
+          start_time?: string | null
+          title?: string
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "itinerary_activities_day_id_fkey"
+            columns: ["day_id"]
+            isOneToOne: false
+            referencedRelation: "itinerary_days"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      itinerary_days: {
+        Row: {
+          created_at: string
+          date: string
+          day_number: number
+          id: string
+          notes: string | null
+          title: string
+          trip_id: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          day_number: number
+          id?: string
+          notes?: string | null
+          title: string
+          trip_id: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          day_number?: number
+          id?: string
+          notes?: string | null
+          title?: string
+          trip_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "itinerary_days_trip_id_fkey"
+            columns: ["trip_id"]
+            isOneToOne: false
+            referencedRelation: "trips"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string
+          full_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email: string
+          full_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      trips: {
+        Row: {
+          budget_level: string
+          created_at: string
+          destination: string
+          end_date: string
+          id: string
+          interests: string[]
+          start_date: string
+          status: Database["public"]["Enums"]["trip_status"]
+          travel_style: string
+          travelers: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          budget_level?: string
+          created_at?: string
+          destination: string
+          end_date: string
+          id?: string
+          interests?: string[]
+          start_date: string
+          status?: Database["public"]["Enums"]["trip_status"]
+          travel_style?: string
+          travelers?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          budget_level?: string
+          created_at?: string
+          destination?: string
+          end_date?: string
+          id?: string
+          interests?: string[]
+          start_date?: string
+          status?: Database["public"]["Enums"]["trip_status"]
+          travel_style?: string
+          travelers?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +179,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      trip_status: "draft" | "planned" | "archived"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +306,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      trip_status: ["draft", "planned", "archived"],
+    },
   },
 } as const
