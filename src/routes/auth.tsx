@@ -12,10 +12,10 @@ import { Compass } from "lucide-react";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Sign in — Voyage" },
-      { name: "description", content: "Sign in to Voyage to plan and manage your trips." },
-      { property: "og:title", content: "Sign in — Voyage" },
-      { property: "og:description", content: "Sign in to Voyage." },
+      { title: "Sign in — BUBOLI" },
+      { name: "description", content: "Sign in to BUBOLI to plan and manage your trips." },
+      { property: "og:title", content: "Sign in — BUBOLI" },
+      { property: "og:description", content: "Sign in to BUBOLI." },
     ],
   }),
   component: AuthPage,
@@ -72,7 +72,7 @@ function AuthPage() {
       <div className="w-full max-w-md">
         <Link to="/" className="mb-8 flex items-center justify-center gap-2 text-foreground">
           <Compass className="h-6 w-6" />
-          <span className="text-lg font-semibold">Voyage</span>
+          <span className="text-lg font-semibold">BUBOLI</span>
         </Link>
         <Card className="p-8">
           <h1 className="text-2xl font-semibold tracking-tight">

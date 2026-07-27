@@ -10,7 +10,7 @@ import type { Tables } from "@/integrations/supabase/types";
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
     meta: [
-      { title: "Your Trips — Voyage" },
+      { title: "Your Trips — BUBOLI" },
       { name: "description", content: "All your trips in one place." },
     ],
   }),
@@ -38,7 +38,7 @@ function Dashboard() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <Link to="/" className="flex items-center gap-2">
             <Compass className="h-5 w-5" />
-            <span className="font-semibold">Voyage</span>
+            <span className="font-semibold">BUBOLI</span>
           </Link>
           <Button variant="ghost" size="sm" onClick={signOut}>
             <LogOut className="mr-2 h-4 w-4" /> Sign out
