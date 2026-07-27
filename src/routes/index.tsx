@@ -5,9 +5,9 @@ import { Sparkles, Map, Calendar, Compass } from "lucide-react";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Voyage — AI Travel Operating System" },
+      { title: "BUBOLI — Plan Your Whole Trip" },
       { name: "description", content: "Plan your entire trip in one place. AI-powered itineraries, bookings, and day-by-day guides tailored to you." },
-      { property: "og:title", content: "Voyage — AI Travel Operating System" },
+      { property: "og:title", content: "BUBOLI — Plan Your Whole Trip" },
       { property: "og:description", content: "Plan your entire trip in one place with AI." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -22,7 +22,7 @@ function Landing() {
       <header className="absolute top-0 z-20 flex w-full items-center justify-between px-6 py-5 md:px-12">
         <div className="flex items-center gap-2 text-white">
           <Compass className="h-6 w-6" />
-          <span className="text-lg font-semibold tracking-tight">Voyage</span>
+          <span className="text-lg font-semibold tracking-tight">BUBOLI</span>
         </div>
         <div className="flex items-center gap-2">
           <Link to="/auth"><Button variant="ghost" className="text-white hover:bg-white/10 hover:text-white">Sign in</Button></Link>
@@ -41,7 +41,7 @@ function Landing() {
             Plan every trip.<br/>In one beautiful place.
           </h1>
           <p className="mt-5 max-w-xl text-base text-white/80 md:text-lg">
-            Voyage turns a destination and a few dates into a complete, day‑by‑day itinerary — powered by AI and built for real travelers.
+            BUBOLI turns a destination and a few dates into a complete, day‑by‑day itinerary — powered by AI and built for real travelers.
           </p>
           <div className="mt-8 flex gap-3">
             <Link to="/auth"><Button size="lg" className="bg-white text-neutral-900 hover:bg-white/90">Start planning free</Button></Link>
@@ -67,7 +67,7 @@ function Landing() {
       </section>
 
       <footer className="border-t px-6 py-8 text-center text-sm text-muted-foreground md:px-12">
-        © {new Date().getFullYear()} Voyage. Built for travelers.
+        © {new Date().getFullYear()} BUBOLI. Built for travelers.
       </footer>
     </div>
   );
