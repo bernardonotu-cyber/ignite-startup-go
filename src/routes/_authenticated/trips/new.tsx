@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import { ArrowLeft, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/trips/new")({
-  head: () => ({ meta: [{ title: "New Trip — Voyage" }] }),
+  head: () => ({ meta: [{ title: "New Trip — BUBOLI" }] }),
   component: NewTrip,
 });
 
