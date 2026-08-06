@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { createLovableAiGatewayProvider } from "./ai-gateway.server";
-import { generateText, Output } from "ai";
+import { streamText, Output, NoObjectGeneratedError } from "ai";
 import { z } from "zod";
 
 const TripInput = z.object({
@@ -11,11 +11,13 @@ const TripInput = z.object({
 const ActivitySchema = z.object({
   title: z.string(),
   description: z.string(),
-  type: z.enum(["activity", "food", "transport", "accommodation", "sightseeing"]),
-  start_time: z.string().describe("HH:MM 24h format"),
+  type: z.string(),
+  start_time: z.string(),
   location: z.string(),
   estimated_cost: z.number().nullable(),
 });
+
+const ALLOWED_TYPES = ["activity", "food", "transport", "accommodation", "sightseeing"] as const;
 
 const ItinerarySchema = z.object({
   days: z.array(z.object({
