@@ -31,7 +31,7 @@ const ACCENT: Record<string, string> = {
   emerald: "from-leaf/90 to-mango/70",
 };
 
-function AddButton({ item }: { item: BasketItem }) {
+export function AddButton({ item }: { item: BasketItem }) {
   const { add, has } = useTripBasket();
   const added = has(item.id);
   return (
@@ -50,7 +50,7 @@ function AddButton({ item }: { item: BasketItem }) {
   );
 }
 
-function Row({
+export function Row({
   icon: Icon,
   title,
   meta,
