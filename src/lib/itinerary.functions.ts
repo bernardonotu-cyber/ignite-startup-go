@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { createLovableAiGatewayProvider } from "./ai-gateway.server";
-import { generateText, Output } from "ai";
+import { streamText, Output, NoObjectGeneratedError } from "ai";
 import { z } from "zod";
 
 const TripInput = z.object({
@@ -11,11 +11,13 @@ const TripInput = z.object({
 const ActivitySchema = z.object({
   title: z.string(),
   description: z.string(),
-  type: z.enum(["activity", "food", "transport", "accommodation", "sightseeing"]),
-  start_time: z.string().describe("HH:MM 24h format"),
+  type: z.string(),
+  start_time: z.string(),
   location: z.string(),
   estimated_cost: z.number().nullable(),
 });
+
+const ALLOWED_TYPES = ["activity", "food", "transport", "accommodation", "sightseeing"] as const;
 
 const ItinerarySchema = z.object({
   days: z.array(z.object({
@@ -42,10 +44,7 @@ export const generateItinerary = createServerFn({ method: "POST" })
     const dayCount = Math.max(1, Math.round((endDate.getTime() - startDate.getTime()) / 86400000) + 1);
 
     const gateway = createLovableAiGatewayProvider(key);
-    const { output } = await generateText({
-      model: gateway("google/gemini-3.6-flash"),
-      output: Output.object({ schema: ItinerarySchema }),
-      prompt: `You are an expert travel planner. Build a detailed ${dayCount}-day itinerary for a trip.
+    const prompt = `You are an expert travel planner. Build a detailed ${dayCount}-day itinerary for a trip.
 
 Destination: ${trip.destination}
 Dates: ${trip.start_date} to ${trip.end_date}
@@ -54,10 +53,32 @@ Budget level: ${trip.budget_level}
 Travel style: ${trip.travel_style}
 Interests: ${(trip.interests as string[]).join(", ") || "general sightseeing"}
 
-Create exactly ${dayCount} days numbered 1 to ${dayCount}. Each day: 4-6 activities with realistic timing, real specific place names, honest cost estimates in USD, mix of sightseeing, food, and rest. Notes summarize the day's theme.`,
-    });
+Create exactly ${dayCount} days numbered 1 to ${dayCount}. Each day: 4-6 activities with realistic timing, real specific place names, honest cost estimates in USD (a number, or null if unknown), mix of sightseeing, food, and rest. start_time must be "HH:MM" 24h format. type must be one of: ${ALLOWED_TYPES.join(", ")}. notes summarizes the day's theme. Return JSON only.`;
 
-    const itinerary = output as z.infer<typeof ItinerarySchema>;
+    let itinerary: z.infer<typeof ItinerarySchema>;
+    try {
+      const result = streamText({
+        model: gateway("google/gemini-3.6-flash"),
+        output: Output.object({ schema: ItinerarySchema }),
+        prompt,
+      });
+      itinerary = (await result.output) as z.infer<typeof ItinerarySchema>;
+    } catch (error) {
+      if (!NoObjectGeneratedError.isInstance(error) || !error.text) throw error;
+      const raw = error.text.replace(/^```(?:json)?/i, "").replace(/```$/, "").trim();
+      const parsed = ItinerarySchema.safeParse(JSON.parse(raw));
+      if (!parsed.success) throw new Error("The AI returned an unexpected format. Please try again.");
+      itinerary = parsed.data;
+    }
+
+    itinerary.days = itinerary.days.map((d) => ({
+      ...d,
+      activities: d.activities.map((a) => ({
+        ...a,
+        type: (ALLOWED_TYPES as readonly string[]).includes(a.type) ? a.type : "activity",
+      })),
+    }));
+
 
     // Clear existing days for this trip
     await context.supabase.from("itinerary_days").delete().eq("trip_id", data.tripId);
