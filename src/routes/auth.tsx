@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
+import { Logo } from "@/components/logo";
 import { toast } from "sonner";
-import { Compass } from "lucide-react";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
@@ -71,7 +71,7 @@ function AuthPage() {
     <div className="flex min-h-screen items-center justify-center bg-muted/30 px-4 py-12">
       <div className="w-full max-w-md">
         <Link to="/" className="mb-8 flex items-center justify-center gap-2 text-foreground">
-          <Compass className="h-6 w-6" />
+          <Logo className="h-7 w-7" />
           <span className="text-lg font-semibold">BUBOLI</span>
         </Link>
         <Card className="p-8">

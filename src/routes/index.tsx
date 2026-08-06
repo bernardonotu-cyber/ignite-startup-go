@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Map, Calendar, Compass } from "lucide-react";
+import { Logo } from "@/components/logo";
+import { Sparkles, Map, Calendar } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -21,7 +22,7 @@ function Landing() {
     <div className="min-h-screen bg-background text-foreground">
       <header className="absolute top-0 z-20 flex w-full items-center justify-between px-6 py-5 md:px-12">
         <div className="flex items-center gap-2 text-white">
-          <Compass className="h-6 w-6" />
+          <Logo className="h-7 w-7" />
           <span className="text-lg font-semibold tracking-tight">BUBOLI</span>
         </div>
         <div className="flex items-center gap-2">
