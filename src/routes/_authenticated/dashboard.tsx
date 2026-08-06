@@ -4,7 +4,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Compass, Plus, MapPin, Calendar, LogOut } from "lucide-react";
+import { Logo } from "@/components/logo";
+import { Plus, MapPin, Calendar, LogOut } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
@@ -37,7 +38,7 @@ function Dashboard() {
       <header className="border-b bg-background">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <Link to="/" className="flex items-center gap-2">
-            <Compass className="h-5 w-5" />
+            <Logo className="h-6 w-6" />
             <span className="font-semibold">BUBOLI</span>
           </Link>
           <Button variant="ghost" size="sm" onClick={signOut}>
@@ -61,7 +62,7 @@ function Dashboard() {
           <p className="text-sm text-muted-foreground">Loading…</p>
         ) : trips.length === 0 ? (
           <Card className="flex flex-col items-center justify-center px-6 py-16 text-center">
-            <Compass className="h-10 w-10 text-muted-foreground" />
+            <Logo className="h-10 w-10 opacity-50" />
             <h3 className="mt-4 text-lg font-semibold">No trips yet</h3>
             <p className="mt-1 max-w-sm text-sm text-muted-foreground">
               Create your first trip and let AI build a full itinerary in seconds.
