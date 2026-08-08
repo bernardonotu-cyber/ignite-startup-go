@@ -7,7 +7,7 @@ import {
   Star,
   Check,
   Plus,
-  Clock,
+  
   Users,
   Landmark,
   CalendarDays,
