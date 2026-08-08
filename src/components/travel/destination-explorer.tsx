@@ -21,6 +21,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { toast } from "sonner";
 import { DESTINATIONS, type Destination } from "@/lib/travel-catalog";
 import { useTripBasket, type BasketItem } from "@/lib/trip-basket";
+import { PlacesLayer } from "@/components/travel/places-layer";
+import { PLACES } from "@/lib/places-catalog";
 
 const ACCENT: Record<string, string> = {
   sky: "from-lagoon/90 to-grape/80",
@@ -97,12 +99,19 @@ export function Row({
 function DestinationDetail({ d }: { d: Destination }) {
   return (
     <Tabs defaultValue="story" className="w-full">
-      <TabsList className="grid w-full grid-cols-4">
+      <TabsList className="grid w-full grid-cols-5">
         <TabsTrigger value="story">Story</TabsTrigger>
+        <TabsTrigger value="places">Places</TabsTrigger>
         <TabsTrigger value="flights">Flights</TabsTrigger>
         <TabsTrigger value="cars">Cars</TabsTrigger>
         <TabsTrigger value="stays">Stays</TabsTrigger>
       </TabsList>
+
+      <TabsContent value="places">
+        <PlacesLayer destinationId={d.id} city={d.city} />
+      </TabsContent>
+
+
 
       <TabsContent value="story" className="space-y-5 pt-4">
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
