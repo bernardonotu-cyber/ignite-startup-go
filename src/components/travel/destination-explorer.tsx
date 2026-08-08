@@ -265,13 +265,14 @@ export function DestinationExplorer() {
               </div>
               <div className="flex items-center justify-between border-t pt-3 text-xs text-muted-foreground">
                 <span className="flex items-center gap-1">
-                  <Clock className="h-3.5 w-3.5" /> {d.bestTime.split(",")[0]}
+                  <MapPin className="h-3.5 w-3.5" /> {(PLACES[d.id] ?? []).length} places
                 </span>
                 <span className="flex items-center gap-1">
                   <Users className="h-3.5 w-3.5" /> ${d.avgDaily}/day
                 </span>
                 <span className="flex items-center gap-1 font-medium text-foreground">
-                  <Star className="h-3.5 w-3.5 fill-mango text-mango" /> Explore
+                  <Star className="h-3.5 w-3.5 fill-mango text-mango" />{" "}
+                  {(PLACES[d.id] ?? []).filter((p) => p.fee === 0).length} free
                 </span>
               </div>
             </div>
