@@ -301,8 +301,10 @@ export function DestinationExplorer() {
               </div>
             </div>
           </button>
+          </Reveal>
         ))}
       </div>
+
 
       <Dialog open={!!open} onOpenChange={(v) => !v && setOpen(null)}>
         <DialogContent className="max-h-[88vh] max-w-3xl overflow-y-auto p-0">
