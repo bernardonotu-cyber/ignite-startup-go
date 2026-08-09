@@ -23,6 +23,8 @@ import { DESTINATIONS, type Destination } from "@/lib/travel-catalog";
 import { useTripBasket, type BasketItem } from "@/lib/trip-basket";
 import { PlacesLayer } from "@/components/travel/places-layer";
 import { PLACES } from "@/lib/places-catalog";
+import { Reveal } from "@/components/reveal";
+
 
 const ACCENT: Record<string, string> = {
   sky: "from-lagoon/90 to-grape/80",
