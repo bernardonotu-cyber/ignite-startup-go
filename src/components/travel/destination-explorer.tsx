@@ -256,12 +256,13 @@ export function DestinationExplorer() {
   return (
     <>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {DESTINATIONS.map((d) => (
+        {DESTINATIONS.map((d, i) => (
+          <Reveal key={d.id} delay={i * 70}>
           <button
-            key={d.id}
             onClick={() => setOpen(d)}
-            className="group overflow-hidden rounded-3xl border bg-card text-left shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+            className="press shine group h-full w-full overflow-hidden rounded-3xl border bg-card text-left shadow-sm transition duration-500 hover:-translate-y-1.5 hover:border-foreground/15 hover:shadow-2xl"
           >
+
             <div className="relative h-52 overflow-hidden">
               <img
                 src={d.image}
