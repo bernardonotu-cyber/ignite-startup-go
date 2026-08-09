@@ -155,3 +155,102 @@
     color: var(--color-foreground);
   }
 }
+
+/* ---------- Premium motion + surface utilities ---------- */
+
+@keyframes buboli-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(0.9); }
+  70% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+@keyframes buboli-ripple {
+  0% { transform: scale(0.2); opacity: 0.45; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+@keyframes buboli-shine {
+  0% { transform: translateX(-120%) skewX(-18deg); }
+  100% { transform: translateX(220%) skewX(-18deg); }
+}
+
+@keyframes buboli-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes buboli-rise {
+  0% { opacity: 0; transform: translateY(14px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Tactile press feedback on any clickable surface */
+@utility press {
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms ease;
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+@utility pop-once {
+  animation: buboli-pop 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@utility rise-in {
+  animation: buboli-rise 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@utility float-slow {
+  animation: buboli-float 5s ease-in-out infinite;
+}
+
+/* Sweeping light across a surface on hover */
+@utility shine {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in oklab, white 26%, transparent),
+      transparent
+    );
+    transform: translateX(-120%) skewX(-18deg);
+    pointer-events: none;
+  }
+  &:hover::after {
+    animation: buboli-shine 900ms ease;
+  }
+}
+
+@utility glass-panel {
+  background: color-mix(in oklab, var(--color-card) 72%, transparent);
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid color-mix(in oklab, var(--color-border) 70%, transparent);
+}
+
+@utility text-gradient-warm {
+  background-image: linear-gradient(
+    100deg,
+    var(--sunset),
+    var(--mango) 45%,
+    var(--lagoon)
+  );
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+

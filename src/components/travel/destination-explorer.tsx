@@ -23,6 +23,8 @@ import { DESTINATIONS, type Destination } from "@/lib/travel-catalog";
 import { useTripBasket, type BasketItem } from "@/lib/trip-basket";
 import { PlacesLayer } from "@/components/travel/places-layer";
 import { PLACES } from "@/lib/places-catalog";
+import { Reveal } from "@/components/reveal";
+
 
 const ACCENT: Record<string, string> = {
   sky: "from-lagoon/90 to-grape/80",
@@ -36,18 +38,40 @@ const ACCENT: Record<string, string> = {
 export function AddButton({ item }: { item: BasketItem }) {
   const { add, has } = useTripBasket();
   const added = has(item.id);
+  const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([]);
+  const [pop, setPop] = useState(0);
+
   return (
     <Button
       size="sm"
       variant={added ? "secondary" : "default"}
-      onClick={() => {
+      className="press relative overflow-hidden"
+      onClick={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const id = Date.now();
+        setRipples((r) => [...r, { id, x: e.clientX - rect.left, y: e.clientY - rect.top }]);
+        setTimeout(() => setRipples((r) => r.filter((x) => x.id !== id)), 600);
         if (added) return;
+        setPop((p) => p + 1);
         add(item);
         toast.success(`${item.title} added to your basket`);
       }}
     >
-      {added ? <Check className="mr-1 h-4 w-4" /> : <Plus className="mr-1 h-4 w-4" />}
-      {added ? "In basket" : "Add"}
+      {ripples.map((r) => (
+        <span
+          key={r.id}
+          className="pointer-events-none absolute h-16 w-16 rounded-full bg-current/30"
+          style={{
+            left: r.x - 32,
+            top: r.y - 32,
+            animation: "buboli-ripple 600ms ease-out forwards",
+          }}
+        />
+      ))}
+      <span key={pop} className={`relative flex items-center ${pop ? "pop-once" : ""}`}>
+        {added ? <Check className="mr-1 h-4 w-4" /> : <Plus className="mr-1 h-4 w-4" />}
+        {added ? "In basket" : "Add"}
+      </span>
     </Button>
   );
 }
@@ -70,12 +94,12 @@ export function Row({
   item: BasketItem;
 }) {
   return (
-    <div className="flex flex-wrap items-center gap-3 rounded-2xl border bg-card p-4">
-      <span className="rounded-xl bg-muted p-2.5">
+    <div className="group flex flex-wrap items-center gap-3 rounded-2xl border bg-card p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition duration-300 hover:-translate-y-0.5 hover:border-foreground/15 hover:shadow-lg">
+      <span className="rounded-xl bg-muted p-2.5 transition duration-300 group-hover:scale-105 group-hover:bg-sunset/10 group-hover:text-sunset">
         <Icon className="h-5 w-5" />
       </span>
       <div className="min-w-[10rem] flex-1">
-        <p className="font-medium">{title}</p>
+        <p className="font-medium tracking-tight">{title}</p>
         <p className="text-xs text-muted-foreground">{meta}</p>
         <div className="mt-2 flex flex-wrap gap-1.5">
           {tags.map((t) => (
@@ -87,7 +111,7 @@ export function Row({
       </div>
       <div className="flex items-center gap-3">
         <div className="text-right">
-          <p className="text-lg font-semibold">${price.toLocaleString()}</p>
+          <p className="text-lg font-semibold tabular-nums">${price.toLocaleString()}</p>
           <p className="text-[11px] text-muted-foreground">{unit}</p>
         </div>
         <AddButton item={item} />
@@ -95,6 +119,7 @@ export function Row({
     </div>
   );
 }
+
 
 function DestinationDetail({ d }: { d: Destination }) {
   return (
@@ -233,12 +258,13 @@ export function DestinationExplorer() {
   return (
     <>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {DESTINATIONS.map((d) => (
+        {DESTINATIONS.map((d, i) => (
+          <Reveal key={d.id} delay={i * 70}>
           <button
-            key={d.id}
             onClick={() => setOpen(d)}
-            className="group overflow-hidden rounded-3xl border bg-card text-left shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+            className="press shine group h-full w-full overflow-hidden rounded-3xl border bg-card text-left shadow-sm transition duration-500 hover:-translate-y-1.5 hover:border-foreground/15 hover:shadow-2xl"
           >
+
             <div className="relative h-52 overflow-hidden">
               <img
                 src={d.image}
@@ -277,8 +303,10 @@ export function DestinationExplorer() {
               </div>
             </div>
           </button>
+          </Reveal>
         ))}
       </div>
+
 
       <Dialog open={!!open} onOpenChange={(v) => !v && setOpen(null)}>
         <DialogContent className="max-h-[88vh] max-w-3xl overflow-y-auto p-0">
