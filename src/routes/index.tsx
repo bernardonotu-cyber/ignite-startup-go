@@ -9,6 +9,8 @@ import { TripBasketProvider } from "@/lib/trip-basket";
 import { TripBasketSheet } from "@/components/travel/trip-basket-sheet";
 import { DestinationExplorer } from "@/components/travel/destination-explorer";
 import { FlightFeed, CarFeed, StayFeed } from "@/components/travel/category-feeds";
+import { TravelerFeed } from "@/components/travel/traveler-feed";
+
 import { DESTINATIONS } from "@/lib/travel-catalog";
 import { Sparkles, Plane, Car, Hotel, MapPin, Search, Compass, Ticket, ArrowRight } from "lucide-react";
 
@@ -102,7 +104,9 @@ function Landing() {
           >
             {[
               { label: "Explore", id: "explore" },
+              { label: "Moments", id: "moments" },
               { label: "Flights", id: "flights" },
+
               { label: "Cars", id: "cars" },
               { label: "Stays", id: "stays" },
             ].map((n) => (
@@ -250,11 +254,26 @@ function Landing() {
         <DestinationExplorer />
       </section>
 
+      {/* TRAVELER MOMENTS */}
+      <section id="moments" className="scroll-mt-24 bg-gradient-to-b from-sunset/5 via-background to-lagoon/5 py-24">
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
+          <SectionHeader
+            eyebrow="Layer 2 · Traveler moments"
+            title="Real people, real places"
+            body="Scroll through what travelers are posting right now — zoos, temples, markets and beaches, with the exact location under every shot. Tap add and it lands in your basket."
+            tint="bg-sunset/15 text-sunset"
+          />
+          <TravelerFeed />
+        </div>
+      </section>
+
+
+
       {/* FLIGHTS */}
       <section id="flights" className="scroll-mt-24 bg-grape/5 py-24">
         <div className="mx-auto max-w-7xl px-4 md:px-8">
           <SectionHeader
-            eyebrow="Layer 2 · Flights"
+            eyebrow="Layer 3 · Flights"
             title="Get there your way"
             body="Compare routes and cabins across our destinations, then add the one that fits to your basket."
             tint="bg-grape/15 text-grape"
@@ -269,7 +288,7 @@ function Landing() {
       <section id="cars" className="scroll-mt-24 bg-mango/5 py-24">
         <div className="mx-auto max-w-7xl px-4 md:px-8">
           <SectionHeader
-            eyebrow="Layer 3 · Cars & pickups"
+            eyebrow="Layer 4 · Cars & pickups"
             title="Wheels for the ground game"
             body="Airport pickups, cliff-road SUVs, scooters and private drivers — priced per day, cancel free."
             tint="bg-mango/20 text-mango"
@@ -284,7 +303,7 @@ function Landing() {
       <section id="stays" className="scroll-mt-24 bg-leaf/5 py-24">
         <div className="mx-auto max-w-7xl px-4 md:px-8">
           <SectionHeader
-            eyebrow="Layer 4 · Hotels & resorts"
+            eyebrow="Layer 5 · Hotels & resorts"
             title="Where you wake up matters"
             body="Cave suites, riads, beach villas and design hostels — hand-picked in each city."
             tint="bg-leaf/15 text-leaf"
