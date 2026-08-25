@@ -273,7 +273,7 @@ function Landing() {
       <section id="flights" className="scroll-mt-24 bg-grape/5 py-24">
         <div className="mx-auto max-w-7xl px-4 md:px-8">
           <SectionHeader
-            eyebrow="Layer 2 · Flights"
+            eyebrow="Layer 3 · Flights"
             title="Get there your way"
             body="Compare routes and cabins across our destinations, then add the one that fits to your basket."
             tint="bg-grape/15 text-grape"
@@ -288,7 +288,7 @@ function Landing() {
       <section id="cars" className="scroll-mt-24 bg-mango/5 py-24">
         <div className="mx-auto max-w-7xl px-4 md:px-8">
           <SectionHeader
-            eyebrow="Layer 3 · Cars & pickups"
+            eyebrow="Layer 4 · Cars & pickups"
             title="Wheels for the ground game"
             body="Airport pickups, cliff-road SUVs, scooters and private drivers — priced per day, cancel free."
             tint="bg-mango/20 text-mango"
@@ -303,7 +303,7 @@ function Landing() {
       <section id="stays" className="scroll-mt-24 bg-leaf/5 py-24">
         <div className="mx-auto max-w-7xl px-4 md:px-8">
           <SectionHeader
-            eyebrow="Layer 4 · Hotels & resorts"
+            eyebrow="Layer 5 · Hotels & resorts"
             title="Where you wake up matters"
             body="Cave suites, riads, beach villas and design hostels — hand-picked in each city."
             tint="bg-leaf/15 text-leaf"
