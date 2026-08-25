@@ -252,6 +252,21 @@ function Landing() {
         <DestinationExplorer />
       </section>
 
+      {/* TRAVELER MOMENTS */}
+      <section id="moments" className="scroll-mt-24 bg-gradient-to-b from-sunset/5 via-background to-lagoon/5 py-24">
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
+          <SectionHeader
+            eyebrow="Layer 2 · Traveler moments"
+            title="Real people, real places"
+            body="Scroll through what travelers are posting right now — zoos, temples, markets and beaches, with the exact location under every shot. Tap add and it lands in your basket."
+            tint="bg-sunset/15 text-sunset"
+          />
+          <TravelerFeed />
+        </div>
+      </section>
+
+
+
       {/* FLIGHTS */}
       <section id="flights" className="scroll-mt-24 bg-grape/5 py-24">
         <div className="mx-auto max-w-7xl px-4 md:px-8">
