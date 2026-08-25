@@ -102,7 +102,9 @@ function Landing() {
           >
             {[
               { label: "Explore", id: "explore" },
+              { label: "Moments", id: "moments" },
               { label: "Flights", id: "flights" },
+
               { label: "Cars", id: "cars" },
               { label: "Stays", id: "stays" },
             ].map((n) => (
