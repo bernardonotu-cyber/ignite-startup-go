@@ -9,6 +9,8 @@ import { TripBasketProvider } from "@/lib/trip-basket";
 import { TripBasketSheet } from "@/components/travel/trip-basket-sheet";
 import { DestinationExplorer } from "@/components/travel/destination-explorer";
 import { FlightFeed, CarFeed, StayFeed } from "@/components/travel/category-feeds";
+import { TravelerFeed } from "@/components/travel/traveler-feed";
+
 import { DESTINATIONS } from "@/lib/travel-catalog";
 import { Sparkles, Plane, Car, Hotel, MapPin, Search, Compass, Ticket, ArrowRight } from "lucide-react";
 
