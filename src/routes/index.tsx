@@ -12,6 +12,7 @@ import { FlightFeed, CarFeed, StayFeed } from "@/components/travel/category-feed
 import { TravelerFeed } from "@/components/travel/traveler-feed";
 
 import { DESTINATIONS } from "@/lib/travel-catalog";
+import { HeroPlane, ScrollPlane } from "@/components/travel/plane-flight";
 import { Sparkles, Plane, Car, Hotel, MapPin, Search, Compass, Ticket, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/")({
