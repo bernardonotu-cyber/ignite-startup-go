@@ -12,6 +12,7 @@ import { FlightFeed, CarFeed, StayFeed } from "@/components/travel/category-feed
 import { TravelerFeed } from "@/components/travel/traveler-feed";
 
 import { DESTINATIONS } from "@/lib/travel-catalog";
+import { HeroPlane, ScrollPlane } from "@/components/travel/plane-flight";
 import { Sparkles, Plane, Car, Hotel, MapPin, Search, Compass, Ticket, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -83,6 +84,7 @@ function Landing() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <ScrollPlane />
       <header
         className={`fixed top-0 z-40 w-full transition-all duration-500 ${
           scrolled ? "bg-background/80 py-2 shadow-sm backdrop-blur-xl" : "py-4"
@@ -139,6 +141,7 @@ function Landing() {
 
       {/* HERO */}
       <section className="relative min-h-[96vh] w-full overflow-hidden">
+        <HeroPlane />
         <img
           src="/images/travel-hero.jpg"
           alt="Coastal road at sunset"
