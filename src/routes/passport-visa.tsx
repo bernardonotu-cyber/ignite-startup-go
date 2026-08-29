@@ -13,12 +13,13 @@ import { RequirementWizard } from "@/components/travel/requirement-wizard";
 import { getDocumentsCatalog } from "@/lib/documents.functions";
 import { DEFAULT_ORIGIN, ORIGIN_COUNTRIES } from "@/lib/documents-ui";
 
-type Search = { from?: string; to?: string };
+type Search = { from?: string; to?: string; purpose?: string };
 
 export const Route = createFileRoute("/passport-visa")({
   validateSearch: (search: Record<string, unknown>): Search => ({
     from: typeof search.from === "string" ? search.from.slice(0, 60) : undefined,
     to: typeof search.to === "string" ? search.to.slice(0, 60) : undefined,
+    purpose: typeof search.purpose === "string" ? search.purpose.slice(0, 30) : undefined,
   }),
   head: () => ({
     meta: [
