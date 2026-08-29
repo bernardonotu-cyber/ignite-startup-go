@@ -1,8 +1,6 @@
 import { useState } from "react";
 import {
   Plane,
-  Car,
-  Hotel,
   MapPin,
   Star,
   Check,
@@ -24,6 +22,7 @@ import { useTripBasket, type BasketItem } from "@/lib/trip-basket";
 import { PlacesLayer } from "@/components/travel/places-layer";
 import { PLACES } from "@/lib/places-catalog";
 import { Reveal } from "@/components/reveal";
+import { CarCard, StayCard } from "@/components/travel/vehicle-stay-detail";
 
 
 const ACCENT: Record<string, string> = {
@@ -207,47 +206,16 @@ function DestinationDetail({ d }: { d: Destination }) {
 
       <TabsContent value="cars" className="space-y-3 pt-4">
         {d.cars.map((c) => (
-          <Row
-            key={c.id}
-            icon={Car}
-            title={c.name}
-            meta={`${c.type} · Pickup: ${c.pickup}`}
-            tags={[`${c.seats} seats`, c.transmission, c.perks]}
-            price={c.price}
-            unit="per day"
-            item={{
-              id: c.id,
-              kind: "car",
-              title: c.name,
-              subtitle: `${c.type} · ${c.pickup}`,
-              price: c.price,
-              destination: d.city,
-            }}
-          />
+          <CarCard key={c.id} car={c} city={d.city} />
         ))}
       </TabsContent>
 
       <TabsContent value="stays" className="space-y-3 pt-4">
         {d.stays.map((s) => (
-          <Row
-            key={s.id}
-            icon={Hotel}
-            title={s.name}
-            meta={`${s.kind} · ${s.area} · ★ ${s.rating}`}
-            tags={s.perks.split(" · ")}
-            price={s.price}
-            unit="per night"
-            item={{
-              id: s.id,
-              kind: "stay",
-              title: s.name,
-              subtitle: `${s.kind} · ${s.area}`,
-              price: s.price,
-              destination: d.city,
-            }}
-          />
+          <StayCard key={s.id} stay={s} city={d.city} />
         ))}
       </TabsContent>
+
     </Tabs>
   );
 }

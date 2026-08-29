@@ -1,6 +1,7 @@
-import { Plane, Car, Hotel } from "lucide-react";
+import { Plane } from "lucide-react";
 import { DESTINATIONS } from "@/lib/travel-catalog";
 import { Row } from "@/components/travel/destination-explorer";
+import { CarCard, StayCard } from "@/components/travel/vehicle-stay-detail";
 
 export function FlightFeed() {
   const rows = DESTINATIONS.map((d) => ({ d, f: d.flights[0]! }));
@@ -34,23 +35,7 @@ export function CarFeed() {
   return (
     <div className="grid gap-3 lg:grid-cols-2">
       {rows.map(({ d, c }) => (
-        <Row
-          key={c.id}
-          icon={Car}
-          title={`${c.name} · ${d.city}`}
-          meta={`${c.type} · Pickup: ${c.pickup}`}
-          tags={[`${c.seats} seats`, c.transmission, c.perks]}
-          price={c.price}
-          unit="per day"
-          item={{
-            id: c.id,
-            kind: "car",
-            title: c.name,
-            subtitle: `${c.type} · ${c.pickup}`,
-            price: c.price,
-            destination: d.city,
-          }}
-        />
+        <CarCard key={c.id} car={c} city={d.city} titleOverride={`${c.name} · ${d.city}`} />
       ))}
     </div>
   );
@@ -61,23 +46,7 @@ export function StayFeed() {
   return (
     <div className="grid gap-3 lg:grid-cols-2">
       {rows.map(({ d, s }) => (
-        <Row
-          key={s.id}
-          icon={Hotel}
-          title={`${s.name} · ${d.city}`}
-          meta={`${s.kind} · ${s.area} · ★ ${s.rating}`}
-          tags={s.perks.split(" · ")}
-          price={s.price}
-          unit="per night"
-          item={{
-            id: s.id,
-            kind: "stay",
-            title: s.name,
-            subtitle: `${s.kind} · ${s.area}`,
-            price: s.price,
-            destination: d.city,
-          }}
-        />
+        <StayCard key={s.id} stay={s} city={d.city} titleOverride={`${s.name} · ${d.city}`} />
       ))}
     </div>
   );
