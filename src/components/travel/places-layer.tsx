@@ -191,14 +191,6 @@ function PlaceGuides({
           ))}
         </div>
       )}
-            </div>
-          );
-        })}
-      </div>
-
-      <p className="flex items-center gap-2 text-xs text-muted-foreground">
-        <Ticket className="h-3.5 w-3.5" /> Fees are typical adult prices and can change seasonally.
-      </p>
     </div>
   );
 }
