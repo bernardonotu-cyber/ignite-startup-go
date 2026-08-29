@@ -18,6 +18,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { toast } from "sonner";
 import { DESTINATIONS, type Destination } from "@/lib/travel-catalog";
+import { guidesForDestination } from "@/lib/guides-catalog";
+import { GuideCard } from "@/components/travel/guide-card";
 import { useTripBasket, type BasketItem } from "@/lib/trip-basket";
 import { PlacesLayer } from "@/components/travel/places-layer";
 import { PLACES } from "@/lib/places-catalog";
