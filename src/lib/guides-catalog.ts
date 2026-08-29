@@ -52,7 +52,7 @@ export const GUIDES: Record<string, TourGuide[]> = {
     },
     {
       id: "g-sant-2",
-      name: "EleniVardaki",
+      name: "Eleni Vardaki",
       title: "Sunset & photography guide",
       image: "/images/guide-sant-2.jpg",
       bio: "Island-born photographer who knows exactly where to stand when the light turns. Brings a spare camera and teaches as you go.",
