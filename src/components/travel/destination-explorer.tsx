@@ -1,8 +1,6 @@
 import { useState } from "react";
 import {
   Plane,
-  Car,
-  Hotel,
   MapPin,
   Star,
   Check,
@@ -24,6 +22,7 @@ import { useTripBasket, type BasketItem } from "@/lib/trip-basket";
 import { PlacesLayer } from "@/components/travel/places-layer";
 import { PLACES } from "@/lib/places-catalog";
 import { Reveal } from "@/components/reveal";
+import { CarCard, StayCard } from "@/components/travel/vehicle-stay-detail";
 
 
 const ACCENT: Record<string, string> = {
