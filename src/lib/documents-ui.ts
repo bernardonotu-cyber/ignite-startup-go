@@ -18,6 +18,22 @@ export const ORIGIN_COUNTRIES = [
   DEFAULT_ORIGIN,
 ];
 
+export const TRAVEL_PURPOSES: { value: string; label: string; hint: string }[] = [
+  { value: "tourism", label: "Tourism / Holiday", hint: "Sightseeing, beaches, city breaks" },
+  { value: "business", label: "Business", hint: "Meetings, conferences, trade fairs" },
+  { value: "study", label: "Study", hint: "School, university, language courses" },
+  { value: "work", label: "Work", hint: "Employment contract or work permit" },
+  { value: "family", label: "Family visit", hint: "Visiting relatives or friends" },
+  { value: "medical", label: "Medical", hint: "Treatment, surgery, check-ups" },
+  { value: "transit", label: "Transit", hint: "Passing through on the way elsewhere" },
+];
+
+export const PURPOSE_LABEL: Record<string, string> = Object.fromEntries(
+  TRAVEL_PURPOSES.map((p) => [p.value, p.label]),
+);
+
+export const DEFAULT_PURPOSE = "tourism";
+
 export const STATUS_FLOW: ApplicationStatus[] = [
   "submitted",
   "in_review",

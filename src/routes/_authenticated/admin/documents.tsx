@@ -24,7 +24,7 @@ import {
   type VisaRuleRow,
   type ApplicationStatus,
 } from "@/lib/documents.functions";
-import { STATUS_FLOW, STATUS_LABEL, formatMoney } from "@/lib/documents-ui";
+import { STATUS_FLOW, STATUS_LABEL, TRAVEL_PURPOSES, formatMoney } from "@/lib/documents-ui";
 
 export const Route = createFileRoute("/_authenticated/admin/documents")({
   component: AdminDocuments,
@@ -329,6 +329,7 @@ function VisaRow({
   onDone: () => void;
 }) {
   const [form, setForm] = useState({
+    purpose: r.purpose,
     type_label: r.type_label,
     requirement: r.requirement,
     stay: r.stay,
@@ -347,6 +348,7 @@ function VisaRow({
       await onSave({
         data: {
           id: r.id,
+          purpose: form.purpose,
           type_label: form.type_label.trim(),
           requirement: form.requirement,
           stay: form.stay.trim(),
@@ -371,8 +373,29 @@ function VisaRow({
     <div className="rounded-2xl border bg-card p-5">
       <p className="text-sm font-medium">
         {r.origin_country} → {r.destination_country}
+        <Badge variant="secondary" className="ml-2 text-[11px] font-normal">
+          {r.purpose_label}
+        </Badge>
       </p>
       <div className="mt-3 grid gap-3 md:grid-cols-4">
+        <div>
+          <Label>Purpose of travel</Label>
+          <Select
+            value={form.purpose}
+            onValueChange={(v) => setForm({ ...form, purpose: v })}
+          >
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {TRAVEL_PURPOSES.map((p) => (
+                <SelectItem key={p.value} value={p.value}>
+                  {p.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
         <div>
           <Label>Label</Label>
           <Input

@@ -3,6 +3,7 @@ import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
+import { PURPOSE_LABEL as PURPOSE_LABELS } from "@/lib/documents-ui";
 
 export type PassportServiceRow = Database["public"]["Tables"]["passport_services"]["Row"];
 export type VisaRuleRow = Database["public"]["Tables"]["visa_rules"]["Row"];
@@ -249,6 +250,9 @@ export const adminUpdateVisaRule = createServerFn({ method: "POST" })
     z
       .object({
         id: z.string().uuid(),
+        purpose: z
+          .enum(["tourism", "business", "study", "work", "family", "medical", "transit"])
+          .optional(),
         type_label: z.string().trim().min(2).max(80),
         requirement: z.string().trim().max(40),
         stay: z.string().trim().max(80),
@@ -262,7 +266,10 @@ export const adminUpdateVisaRule = createServerFn({ method: "POST" })
       .parse(d),
   )
   .handler(async ({ data, context }) => {
-    const { id, ...patch } = data;
+    const { id, purpose, ...rest } = data;
+    const patch = purpose
+      ? { ...rest, purpose, purpose_label: PURPOSE_LABELS[purpose] ?? purpose }
+      : rest;
     const { error } = await context.supabase.from("visa_rules").update(patch).eq("id", id);
     if (error) throw error;
     return { ok: true };

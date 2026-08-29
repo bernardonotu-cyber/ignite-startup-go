@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Compass, ArrowRight } from "lucide-react";
 import { DESTINATIONS } from "@/lib/travel-catalog";
-import { ORIGIN_COUNTRIES } from "@/lib/documents-ui";
+import { ORIGIN_COUNTRIES, TRAVEL_PURPOSES, DEFAULT_PURPOSE } from "@/lib/documents-ui";
 
 const DESTINATION_COUNTRIES = Array.from(
   new Map(DESTINATIONS.map((d) => [d.country, d.city])).entries(),
@@ -14,10 +14,11 @@ export function RequirementWizard({ compact = false }: { compact?: boolean }) {
   const navigate = useNavigate();
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
+  const [purpose, setPurpose] = useState(DEFAULT_PURPOSE);
 
   const go = () => {
     if (!from || !to) return;
-    navigate({ to: "/passport-visa", search: { from, to } });
+    navigate({ to: "/passport-visa", search: { from, to, purpose } });
   };
 
   return (
@@ -30,13 +31,13 @@ export function RequirementWizard({ compact = false }: { compact?: boolean }) {
         <Compass className="h-4 w-4" /> Step 1 — check your documents
       </div>
       <p className="mt-2 text-lg font-semibold tracking-tight">
-        Tell us where you're going from, and where to.
+        Tell us where you're going from, where to, and why.
       </p>
       <p className="mt-1 text-sm text-muted-foreground">
-        We'll tell you in plain English whether you need a visa or a new passport — then help you apply.
+        We'll recommend the exact visa for your trip — or tell you if you just need a passport.
       </p>
 
-      <div className="mt-5 grid gap-3 md:grid-cols-[1fr_1fr_auto]">
+      <div className="mt-5 grid gap-3 md:grid-cols-3">
         <Select value={from} onValueChange={setFrom}>
           <SelectTrigger className="h-12 rounded-2xl">
             <SelectValue placeholder="Travelling from" />
@@ -63,14 +64,30 @@ export function RequirementWizard({ compact = false }: { compact?: boolean }) {
           </SelectContent>
         </Select>
 
-        <Button
-          onClick={go}
-          disabled={!from || !to}
-          className="press h-12 rounded-2xl bg-foreground px-6 text-background hover:bg-foreground/90"
-        >
-          Check my requirements <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
+        <Select value={purpose} onValueChange={setPurpose}>
+          <SelectTrigger className="h-12 rounded-2xl">
+            <SelectValue placeholder="Purpose of travel" />
+          </SelectTrigger>
+          <SelectContent>
+            {TRAVEL_PURPOSES.map((p) => (
+              <SelectItem key={p.value} value={p.value}>
+                <span className="flex flex-col text-left">
+                  <span>{p.label}</span>
+                  <span className="text-[11px] text-muted-foreground">{p.hint}</span>
+                </span>
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
+
+      <Button
+        onClick={go}
+        disabled={!from || !to}
+        className="press mt-3 h-12 w-full rounded-2xl bg-foreground px-6 text-background hover:bg-foreground/90 md:w-auto"
+      >
+        Check my requirements <ArrowRight className="ml-2 h-4 w-4" />
+      </Button>
     </div>
   );
 }

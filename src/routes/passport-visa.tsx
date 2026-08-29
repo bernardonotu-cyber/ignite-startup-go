@@ -10,15 +10,22 @@ import { TripBasketSheet } from "@/components/travel/trip-basket-sheet";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { DocumentsLayer, VisaCard } from "@/components/travel/documents-layer";
 import { RequirementWizard } from "@/components/travel/requirement-wizard";
+import { VisaTypesGrid } from "@/components/travel/visa-types-grid";
 import { getDocumentsCatalog } from "@/lib/documents.functions";
-import { DEFAULT_ORIGIN, ORIGIN_COUNTRIES } from "@/lib/documents-ui";
+import {
+  DEFAULT_ORIGIN,
+  DEFAULT_PURPOSE,
+  ORIGIN_COUNTRIES,
+  PURPOSE_LABEL,
+} from "@/lib/documents-ui";
 
-type Search = { from?: string; to?: string };
+type Search = { from?: string; to?: string; purpose?: string };
 
 export const Route = createFileRoute("/passport-visa")({
   validateSearch: (search: Record<string, unknown>): Search => ({
     from: typeof search.from === "string" ? search.from.slice(0, 60) : undefined,
     to: typeof search.to === "string" ? search.to.slice(0, 60) : undefined,
+    purpose: typeof search.purpose === "string" ? search.purpose.slice(0, 30) : undefined,
   }),
   head: () => ({
     meta: [
@@ -50,7 +57,7 @@ function PassportVisaPage() {
 }
 
 function Page() {
-  const { from, to } = Route.useSearch();
+  const { from, to, purpose } = Route.useSearch();
   const fetchCatalog = useServerFn(getDocumentsCatalog);
   const { data, isLoading } = useQuery({
     queryKey: ["documents-catalog"],
@@ -61,12 +68,26 @@ function Page() {
   const rules = data?.rules ?? [];
 
   const origin = from && ORIGIN_COUNTRIES.includes(from) ? from : DEFAULT_ORIGIN;
-  const matches =
+  const activePurpose = purpose && PURPOSE_LABEL[purpose] ? purpose : DEFAULT_PURPOSE;
+
+  const pool =
     from && to
       ? rules.filter(
-          (r) => r.origin_country === origin && r.destination_country.startsWith(to),
+          (r) =>
+            r.destination_country.startsWith(to) &&
+            (r.origin_country === origin || r.origin_country === DEFAULT_ORIGIN),
         )
       : [];
+
+  const pick = (p: string) => {
+    const all = pool.filter((r) => r.purpose === p);
+    const specific = all.filter((r) => r.origin_country === origin);
+    return specific.length ? specific : all;
+  };
+
+  const purposeMatches = pick(activePurpose);
+  const fellBack = purposeMatches.length === 0 && activePurpose !== DEFAULT_PURPOSE;
+  const matches = purposeMatches.length ? purposeMatches : pick(DEFAULT_PURPOSE);
   const visaFree = matches.length > 0 && matches.every((r) => r.requirement === "visa_free");
 
   return (
@@ -144,10 +165,18 @@ function Page() {
                           : `You'll need a visa for ${to}`}
                       </h2>
                       <p className="mt-1 text-sm text-muted-foreground">
-                        Travelling from {from}. {visaFree
+                        Travelling from {from} for {PURPOSE_LABEL[activePurpose].toLowerCase()}.{" "}
+                        {visaFree
                           ? "Just make sure your passport is valid — most countries want at least six months left."
                           : "Here are the options that apply to you, with fees and processing times."}
                       </p>
+                      {fellBack ? (
+                        <p className="mt-2 rounded-xl bg-background/60 p-3 text-xs text-muted-foreground">
+                          We don't have a dedicated {PURPOSE_LABEL[activePurpose].toLowerCase()}{" "}
+                          rule for {to} yet, so these are the closest options. Browse all visa types
+                          below for more.
+                        </p>
+                      ) : null}
                     </div>
                   </div>
 
@@ -176,6 +205,10 @@ function Page() {
             )}
           </section>
         ) : null}
+
+        <div className="mt-16">
+          <VisaTypesGrid rules={rules} />
+        </div>
 
         <div className="mt-16">
           <h2 className="mb-6 text-2xl font-semibold tracking-tight">Browse all services</h2>

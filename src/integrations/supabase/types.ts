@@ -375,6 +375,8 @@ export type Database = {
           note: string
           origin_country: string
           processing: string
+          purpose: string
+          purpose_label: string
           requirement: string
           stay: string
           type_label: string
@@ -392,6 +394,8 @@ export type Database = {
           note?: string
           origin_country?: string
           processing?: string
+          purpose?: string
+          purpose_label?: string
           requirement?: string
           stay?: string
           type_label?: string
@@ -409,6 +413,8 @@ export type Database = {
           note?: string
           origin_country?: string
           processing?: string
+          purpose?: string
+          purpose_label?: string
           requirement?: string
           stay?: string
           type_label?: string
