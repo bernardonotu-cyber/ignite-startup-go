@@ -191,40 +191,37 @@ function Landing() {
             </div>
           </div>
 
-          <div className="rise-in w-full rounded-[28px] border border-white/20 bg-white/10 p-4 shadow-2xl backdrop-blur-2xl" style={{ animationDelay: "140ms" }}>
-            <p className="px-1 pb-3 text-xs uppercase tracking-[0.2em] text-white/70">Start your basket</p>
-            <div className="flex flex-col gap-2">
-              <div className="flex flex-1 items-center gap-2 rounded-2xl bg-white/95 px-3 text-neutral-900">
-                <MapPin className="h-4 w-4 shrink-0 text-sunset" />
-                <Select value={picked} onValueChange={setPicked}>
-                  <SelectTrigger className="border-0 bg-transparent shadow-none focus:ring-0">
-                    <SelectValue placeholder="Where to?" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {DESTINATIONS.map((d) => (
-                      <SelectItem key={d.id} value={d.id}>
-                        {d.city}, {d.country}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+          <div className="rise-in w-full" style={{ animationDelay: "140ms" }}>
+            <RequirementWizard compact />
+            <div className="mt-3 rounded-[28px] border border-white/20 bg-white/10 p-4 shadow-2xl backdrop-blur-2xl">
+              <p className="px-1 pb-3 text-xs uppercase tracking-[0.2em] text-white/70">Or start your basket</p>
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-1 items-center gap-2 rounded-2xl bg-white/95 px-3 text-neutral-900">
+                  <MapPin className="h-4 w-4 shrink-0 text-sunset" />
+                  <Select value={picked} onValueChange={setPicked}>
+                    <SelectTrigger className="border-0 bg-transparent shadow-none focus:ring-0">
+                      <SelectValue placeholder="Where to?" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {DESTINATIONS.map((d) => (
+                        <SelectItem key={d.id} value={d.id}>
+                          {d.city}, {d.country}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <Button
+                  size="lg"
+                  className="press shine w-full rounded-2xl bg-sunset text-sunset-foreground hover:bg-sunset/90"
+                  onClick={() => scrollTo("explore")}
+                >
+                  <Search className="mr-2 h-4 w-4" /> Explore places
+                </Button>
               </div>
-              <Button
-                size="lg"
-                className="press shine w-full rounded-2xl bg-sunset text-sunset-foreground hover:bg-sunset/90"
-                onClick={() => scrollTo("explore")}
-              >
-                <Search className="mr-2 h-4 w-4" /> Explore places
-              </Button>
-            </div>
-            <div className="mt-4 flex flex-wrap gap-2 px-1 text-xs text-white/85">
-              {["Flights", "Car rental", "Hotels & resorts", "Day-by-day AI plan"].map((t) => (
-                <span key={t} className="rounded-full bg-white/15 px-2.5 py-1">
-                  {t}
-                </span>
-              ))}
             </div>
           </div>
+
         </div>
       </section>
 
