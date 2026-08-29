@@ -159,10 +159,18 @@ function Page() {
                           : `You'll need a visa for ${to}`}
                       </h2>
                       <p className="mt-1 text-sm text-muted-foreground">
-                        Travelling from {from}. {visaFree
+                        Travelling from {from} for {PURPOSE_LABEL[activePurpose].toLowerCase()}.{" "}
+                        {visaFree
                           ? "Just make sure your passport is valid — most countries want at least six months left."
                           : "Here are the options that apply to you, with fees and processing times."}
                       </p>
+                      {fellBack ? (
+                        <p className="mt-2 rounded-xl bg-background/60 p-3 text-xs text-muted-foreground">
+                          We don't have a dedicated {PURPOSE_LABEL[activePurpose].toLowerCase()}{" "}
+                          rule for {to} yet, so these are the closest options. Browse all visa types
+                          below for more.
+                        </p>
+                      ) : null}
                     </div>
                   </div>
 
