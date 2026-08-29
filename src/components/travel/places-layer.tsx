@@ -121,6 +121,76 @@ export function PlacesLayer({ destinationId, city }: { destinationId: string; ci
                   </ul>
                 </div>
               )}
+
+              <PlaceGuides destinationId={destinationId} placeId={p.id} placeName={p.name} city={city} />
+            </div>
+          );
+        })}
+      </div>
+
+      <p className="flex items-center gap-2 text-xs text-muted-foreground">
+        <Ticket className="h-3.5 w-3.5" /> Fees are typical adult prices and can change seasonally.
+      </p>
+    </div>
+  );
+}
+
+function PlaceGuides({
+  destinationId,
+  placeId,
+  placeName,
+  city,
+}: {
+  destinationId: string;
+  placeId: string;
+  placeName: string;
+  city: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const guides = guidesForPlace(destinationId, placeId);
+  if (guides.length === 0) return null;
+  const from = Math.min(...guides.map((g) => g.fee));
+
+  return (
+    <div className="mt-4 rounded-xl border bg-muted/30 p-3">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="press flex w-full items-center justify-between gap-3 text-left"
+      >
+        <span className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+          <UserRound className="h-3.5 w-3.5" /> {guides.length} tour guides for {placeName}
+        </span>
+        <span className="flex items-center gap-2 text-xs text-muted-foreground">
+          from ${from}
+          <ChevronDown className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`} />
+        </span>
+      </button>
+
+      {!open && (
+        <div className="mt-2.5 flex items-center gap-2">
+          {guides.slice(0, 4).map((g) => (
+            <img
+              key={g.id}
+              src={g.image}
+              alt={g.name}
+              loading="lazy"
+              width={64}
+              height={64}
+              className="h-9 w-9 rounded-full border-2 border-background object-cover"
+            />
+          ))}
+          <span className="text-xs text-muted-foreground">Tap to see who can take you round</span>
+        </div>
+      )}
+
+      {open && (
+        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          {guides.map((g) => (
+            <GuideCard key={g.id} guide={g} city={city} />
+          ))}
+        </div>
+      )}
             </div>
           );
         })}
