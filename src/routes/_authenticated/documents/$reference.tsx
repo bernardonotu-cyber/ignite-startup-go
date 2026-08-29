@@ -5,6 +5,7 @@ import { ArrowLeft, Check, Circle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Logo } from "@/components/logo";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { getApplication } from "@/lib/documents.functions";
 import { STATUS_FLOW, STATUS_LABEL, formatMoney } from "@/lib/documents-ui";
 

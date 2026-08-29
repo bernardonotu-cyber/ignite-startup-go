@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Logo } from "@/components/logo";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Plus, MapPin, Calendar, LogOut } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 
