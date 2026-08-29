@@ -1,10 +1,12 @@
 import { useMemo, useState } from "react";
-import { Ticket, MapPin, Clock, Navigation, Check, Plus, Route } from "lucide-react";
+import { Ticket, MapPin, Clock, Navigation, Check, Plus, Route, UserRound, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { PLACES, distanceKm, formatKm, driveTime, type Place } from "@/lib/places-catalog";
 import { useTripBasket } from "@/lib/trip-basket";
+import { guidesForPlace } from "@/lib/guides-catalog";
+import { GuideCard } from "@/components/travel/guide-card";
 
 function AddPlace({ place, city }: { place: Place; city: string }) {
   const { add, has } = useTripBasket();
