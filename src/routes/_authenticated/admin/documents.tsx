@@ -348,6 +348,7 @@ function VisaRow({
       await onSave({
         data: {
           id: r.id,
+          purpose: form.purpose,
           type_label: form.type_label.trim(),
           requirement: form.requirement,
           stay: form.stay.trim(),
