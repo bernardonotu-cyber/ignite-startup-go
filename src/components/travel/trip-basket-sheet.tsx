@@ -1,4 +1,4 @@
-import { Plane, Trash2, Hotel, Car, MapPin, Sparkles, Ticket } from "lucide-react";
+import { Plane, Trash2, Hotel, Car, MapPin, Sparkles, Ticket, BookUser } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -19,6 +19,7 @@ const KIND_ICON: Record<BasketKind, typeof Plane> = {
   car: Car,
   stay: Hotel,
   place: Ticket,
+  document: BookUser,
 };
 
 const KIND_LABEL: Record<BasketKind, string> = {
@@ -27,6 +28,7 @@ const KIND_LABEL: Record<BasketKind, string> = {
   car: "Car",
   stay: "Stay",
   place: "Attraction",
+  document: "Documents",
 };
 
 export function TripBasketSheet() {
