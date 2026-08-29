@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 
-export type BasketKind = "destination" | "flight" | "car" | "stay" | "place" | "document";
+export type BasketKind = "destination" | "flight" | "car" | "stay" | "place" | "document" | "guide";
 
 export type BasketItem = {
   id: string;
