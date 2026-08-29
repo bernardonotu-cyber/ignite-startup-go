@@ -24,7 +24,7 @@ import {
   type VisaRuleRow,
   type ApplicationStatus,
 } from "@/lib/documents.functions";
-import { STATUS_FLOW, STATUS_LABEL, formatMoney } from "@/lib/documents-ui";
+import { STATUS_FLOW, STATUS_LABEL, TRAVEL_PURPOSES, formatMoney } from "@/lib/documents-ui";
 
 export const Route = createFileRoute("/_authenticated/admin/documents")({
   component: AdminDocuments,
