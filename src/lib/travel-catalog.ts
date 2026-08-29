@@ -19,6 +19,17 @@ export type Car = {
   transmission: string;
   perks: string;
   price: number;
+  image: string;
+  condition: string;
+  conditionNote: string;
+  year: number;
+  mileage: string;
+  fuel: string;
+  luggage: string;
+  airCon: string;
+  lastServiced: string;
+  insurance: string;
+  cancellation: string;
 };
 
 export type Stay = {
@@ -29,6 +40,20 @@ export type Stay = {
   rating: number;
   perks: string;
   price: number;
+  image: string;
+  condition: string;
+  conditionNote: string;
+  renovated: string;
+  roomType: string;
+  roomSize: string;
+  beds: string;
+  maxGuests: number;
+  view: string;
+  amenities: string[];
+  cleanliness: number;
+  checkIn: string;
+  checkOut: string;
+  cancellation: string;
 };
 
 export type Destination = {
@@ -75,12 +100,42 @@ export const DESTINATIONS: Destination[] = [
       { id: "f-sant-2", airline: "Lufthansa", route: "JFK → FRA → JTR", depart: "21:05", arrive: "17:55 +1", duration: "14h 50m", stops: "1 stop", cabin: "Premium", price: 1180 },
     ],
     cars: [
-      { id: "c-sant-1", name: "Fiat Panda", type: "Compact", pickup: "Santorini Airport (JTR)", seats: 4, transmission: "Manual", perks: "Free cancellation · Unlimited km", price: 38 },
-      { id: "c-sant-2", name: "Jeep Renegade", type: "Small SUV", pickup: "Fira town office", seats: 5, transmission: "Automatic", perks: "Cliff-road friendly · Full insurance", price: 79 },
+      {
+        id: "c-sant-1", name: "Fiat Panda", type: "Compact", pickup: "Santorini Airport (JTR)", seats: 4, transmission: "Manual",
+        perks: "Free cancellation · Unlimited km", price: 38,
+        image: "/images/c-sant-1.jpg",
+        condition: "Very good", conditionNote: "Light cosmetic scuffs on the rear bumper, spotless interior, new tyres fitted this season.",
+        year: 2023, mileage: "41,200 km", fuel: "Petrol · 5.2 L/100km", luggage: "2 cabin bags", airCon: "Yes",
+        lastServiced: "6 weeks ago", insurance: "Third-party included · €900 excess", cancellation: "Free up to 24h before pickup",
+      },
+      {
+        id: "c-sant-2", name: "Jeep Renegade", type: "Small SUV", pickup: "Fira town office", seats: 5, transmission: "Automatic",
+        perks: "Cliff-road friendly · Full insurance", price: 79,
+        image: "/images/c-sant-2.jpg",
+        condition: "Excellent", conditionNote: "Nearly new fleet vehicle, no visible damage, deep-cleaned between every rental.",
+        year: 2025, mileage: "9,800 km", fuel: "Petrol · 6.4 L/100km", luggage: "3 large bags", airCon: "Dual-zone climate",
+        lastServiced: "2 weeks ago", insurance: "Full cover · Zero excess", cancellation: "Free up to 48h before pickup",
+      },
     ],
     stays: [
-      { id: "h-sant-1", name: "Caldera Cave Suites", kind: "Boutique hotel", area: "Oia", rating: 4.8, perks: "Infinity pool · Caldera view · Breakfast", price: 340 },
-      { id: "h-sant-2", name: "Blue Dome Residences", kind: "Apartment", area: "Fira", rating: 4.5, perks: "Kitchen · Walk to nightlife", price: 165 },
+      {
+        id: "h-sant-1", name: "Caldera Cave Suites", kind: "Boutique hotel", area: "Oia", rating: 4.8,
+        perks: "Infinity pool · Caldera view · Breakfast", price: 340,
+        image: "/images/h-sant-1.jpg",
+        condition: "Excellent", conditionNote: "Cave suites re-plastered and refitted in 2024 — fresh linens, new bathrooms, no wear on furnishings.",
+        renovated: "Renovated 2024", roomType: "Cave suite with terrace", roomSize: "38 m²", beds: "1 king bed", maxGuests: 2,
+        view: "Caldera and sunset", amenities: ["Infinity pool", "Breakfast included", "Air conditioning", "Free Wi-Fi", "Airport transfer", "Concierge"],
+        cleanliness: 9.6, checkIn: "15:00", checkOut: "11:00", cancellation: "Free cancellation up to 7 days before arrival",
+      },
+      {
+        id: "h-sant-2", name: "Blue Dome Residences", kind: "Apartment", area: "Fira", rating: 4.5,
+        perks: "Kitchen · Walk to nightlife", price: 165,
+        image: "/images/h-sant-2.jpg",
+        condition: "Good", conditionNote: "Well-kept family-run apartments; simple furniture, some sun-fading on the shutters, immaculate kitchen.",
+        renovated: "Refreshed 2022", roomType: "One-bedroom apartment", roomSize: "45 m²", beds: "1 double + sofa bed", maxGuests: 3,
+        view: "Village rooftops", amenities: ["Full kitchen", "Washing machine", "Balcony", "Free Wi-Fi", "Air conditioning"],
+        cleanliness: 9.1, checkIn: "14:00", checkOut: "10:30", cancellation: "Free cancellation up to 3 days before arrival",
+      },
     ],
   },
   {
@@ -107,12 +162,42 @@ export const DESTINATIONS: Destination[] = [
       { id: "f-tok-2", airline: "Japan Airlines", route: "LAX → NRT", depart: "13:20", arrive: "17:40 +1", duration: "11h 20m", stops: "Nonstop", cabin: "Business", price: 3240 },
     ],
     cars: [
-      { id: "c-tok-1", name: "Toyota Yaris Hybrid", type: "Compact", pickup: "Haneda Airport (HND)", seats: 5, transmission: "Automatic", perks: "ETC toll card · English GPS", price: 55 },
-      { id: "c-tok-2", name: "Nissan Serena", type: "Van", pickup: "Shinjuku station office", seats: 7, transmission: "Automatic", perks: "Great for day trips to Hakone", price: 98 },
+      {
+        id: "c-tok-1", name: "Toyota Yaris Hybrid", type: "Compact", pickup: "Haneda Airport (HND)", seats: 5, transmission: "Automatic",
+        perks: "ETC toll card · English GPS", price: 55,
+        image: "/images/c-tok-1.jpg",
+        condition: "Excellent", conditionNote: "Immaculate Japanese rental fleet standard — paint corrected, interior showroom-clean.",
+        year: 2024, mileage: "18,400 km", fuel: "Hybrid · 3.8 L/100km", luggage: "2 large bags", airCon: "Climate control",
+        lastServiced: "3 weeks ago", insurance: "Full cover · ¥0 excess", cancellation: "Free up to 24h before pickup",
+      },
+      {
+        id: "c-tok-2", name: "Nissan Serena", type: "Van", pickup: "Shinjuku station office", seats: 7, transmission: "Automatic",
+        perks: "Great for day trips to Hakone", price: 98,
+        image: "/images/c-tok-2.jpg",
+        condition: "Very good", conditionNote: "Higher-mileage family van, seats recently steam-cleaned, minor scuff on the sliding door track.",
+        year: 2023, mileage: "62,700 km", fuel: "Petrol · 7.1 L/100km", luggage: "5 large bags", airCon: "Tri-zone climate",
+        lastServiced: "1 month ago", insurance: "Full cover · ¥20,000 excess", cancellation: "Free up to 48h before pickup",
+      },
     ],
     stays: [
-      { id: "h-tok-1", name: "Park Tower Shinjuku", kind: "Luxury hotel", area: "Shinjuku", rating: 4.9, perks: "Skyline bar · Onsen floor", price: 420 },
-      { id: "h-tok-2", name: "Nui. Hostel & Bar", kind: "Design hostel", area: "Kuramae", rating: 4.6, perks: "River views · Great coffee", price: 62 },
+      {
+        id: "h-tok-1", name: "Park Tower Shinjuku", kind: "Luxury hotel", area: "Shinjuku", rating: 4.9,
+        perks: "Skyline bar · Onsen floor", price: 420,
+        image: "/images/h-tok-1.jpg",
+        condition: "Excellent", conditionNote: "Flagship property with rolling refurbishment — rooms on high floors were fully refitted last year.",
+        renovated: "Renovated 2025", roomType: "Deluxe city room", roomSize: "48 m²", beds: "1 king bed", maxGuests: 2,
+        view: "Skyline, Mount Fuji on clear days", amenities: ["Onsen floor", "Sky bar", "Gym & pool", "Free Wi-Fi", "Room service", "Laundry"],
+        cleanliness: 9.8, checkIn: "15:00", checkOut: "12:00", cancellation: "Free cancellation up to 48h before arrival",
+      },
+      {
+        id: "h-tok-2", name: "Nui. Hostel & Bar", kind: "Design hostel", area: "Kuramae", rating: 4.6,
+        perks: "River views · Great coffee", price: 62,
+        image: "/images/h-tok-2.jpg",
+        condition: "Good", conditionNote: "Converted warehouse — raw timber and concrete by design; bunks and bathrooms kept spotless.",
+        renovated: "Converted 2019", roomType: "Private double", roomSize: "16 m²", beds: "1 double bed", maxGuests: 2,
+        view: "Sumida river side street", amenities: ["Café & bar", "Shared lounge", "Free Wi-Fi", "Luggage storage", "Air conditioning"],
+        cleanliness: 9.0, checkIn: "16:00", checkOut: "11:00", cancellation: "Free cancellation up to 24h before arrival",
+      },
     ],
   },
   {
@@ -139,12 +224,42 @@ export const DESTINATIONS: Destination[] = [
       { id: "f-mar-2", airline: "Air France", route: "JFK → CDG → RAK", depart: "22:10", arrive: "15:20 +1", duration: "12h 10m", stops: "1 stop", cabin: "Economy", price: 705 },
     ],
     cars: [
-      { id: "c-mar-1", name: "Dacia Logan", type: "Sedan", pickup: "Marrakech Menara (RAK)", seats: 5, transmission: "Manual", perks: "Cheapest option · A/C", price: 29 },
-      { id: "c-mar-2", name: "Land Cruiser + driver", type: "4x4 with driver", pickup: "Riad doorstep", seats: 6, transmission: "Automatic", perks: "Desert-ready · English-speaking driver", price: 145 },
+      {
+        id: "c-mar-1", name: "Dacia Logan", type: "Sedan", pickup: "Marrakech Menara (RAK)", seats: 5, transmission: "Manual",
+        perks: "Cheapest option · A/C", price: 29,
+        image: "/images/c-mar-1.jpg",
+        condition: "Fair", conditionNote: "Honest workhorse — a few desert-dust scratches and a small stone chip on the windscreen, mechanically sound.",
+        year: 2021, mileage: "112,000 km", fuel: "Diesel · 5.0 L/100km", luggage: "3 large bags", airCon: "Yes",
+        lastServiced: "2 months ago", insurance: "Third-party · 8,000 MAD excess", cancellation: "Free up to 24h before pickup",
+      },
+      {
+        id: "c-mar-2", name: "Land Cruiser + driver", type: "4x4 with driver", pickup: "Riad doorstep", seats: 6, transmission: "Automatic",
+        perks: "Desert-ready · English-speaking driver", price: 145,
+        image: "/images/c-mar-2.jpg",
+        condition: "Excellent", conditionNote: "Owner-driven and meticulously maintained; desert-prepped with recovery kit and cold-box.",
+        year: 2024, mileage: "34,500 km", fuel: "Diesel · 9.2 L/100km", luggage: "5 large bags", airCon: "Rear climate vents",
+        lastServiced: "Weekly checks", insurance: "Fully insured with driver", cancellation: "Free up to 72h before pickup",
+      },
     ],
     stays: [
-      { id: "h-mar-1", name: "Riad Yasmine", kind: "Riad", area: "Medina", rating: 4.7, perks: "Courtyard pool · Rooftop breakfast", price: 130 },
-      { id: "h-mar-2", name: "Palmeraie Desert Resort", kind: "Resort", area: "Palmeraie", rating: 4.6, perks: "Spa · Two pools · Shuttle", price: 240 },
+      {
+        id: "h-mar-1", name: "Riad Yasmine", kind: "Riad", area: "Medina", rating: 4.7,
+        perks: "Courtyard pool · Rooftop breakfast", price: 130,
+        image: "/images/h-mar-1.jpg",
+        condition: "Very good", conditionNote: "Restored 19th-century riad; original tadelakt and zellige kept intact, bathrooms redone in 2023.",
+        renovated: "Restored 2023", roomType: "Courtyard double", roomSize: "24 m²", beds: "1 queen bed", maxGuests: 2,
+        view: "Inner courtyard and plunge pool", amenities: ["Courtyard pool", "Rooftop breakfast", "Hammam", "Free Wi-Fi", "Air conditioning"],
+        cleanliness: 9.4, checkIn: "14:00", checkOut: "11:00", cancellation: "Free cancellation up to 5 days before arrival",
+      },
+      {
+        id: "h-mar-2", name: "Palmeraie Desert Resort", kind: "Resort", area: "Palmeraie", rating: 4.6,
+        perks: "Spa · Two pools · Shuttle", price: 240,
+        image: "/images/h-mar-2.jpg",
+        condition: "Very good", conditionNote: "Large resort in steady condition; garden villas newest, main-wing rooms show mild wear on soft furnishings.",
+        renovated: "Wing refurbished 2024", roomType: "Garden villa room", roomSize: "42 m²", beds: "1 king bed", maxGuests: 3,
+        view: "Palm grove and pool", amenities: ["Two pools", "Spa & hammam", "Medina shuttle", "Restaurant", "Free Wi-Fi", "Tennis court"],
+        cleanliness: 9.2, checkIn: "15:00", checkOut: "12:00", cancellation: "Free cancellation up to 7 days before arrival",
+      },
     ],
   },
   {
@@ -171,12 +286,42 @@ export const DESTINATIONS: Destination[] = [
       { id: "f-cpt-2", airline: "Qatar Airways", route: "JFK → DOH → CPT", depart: "20:30", arrive: "14:05 +2", duration: "22h 35m", stops: "1 stop", cabin: "Economy", price: 995 },
     ],
     cars: [
-      { id: "c-cpt-1", name: "VW Polo", type: "Compact", pickup: "Cape Town Intl (CPT)", seats: 5, transmission: "Manual", perks: "Unlimited km · Free extra driver", price: 32 },
-      { id: "c-cpt-2", name: "Ford Ranger", type: "Pickup 4x4", pickup: "V&A Waterfront", seats: 5, transmission: "Automatic", perks: "Garden Route ready", price: 88 },
+      {
+        id: "c-cpt-1", name: "VW Polo", type: "Compact", pickup: "Cape Town Intl (CPT)", seats: 5, transmission: "Manual",
+        perks: "Unlimited km · Free extra driver", price: 32,
+        image: "/images/c-cpt-1.jpg",
+        condition: "Very good", conditionNote: "Two-year-old fleet car, one small door ding, fresh service and new wiper blades.",
+        year: 2024, mileage: "48,900 km", fuel: "Petrol · 5.6 L/100km", luggage: "2 large bags", airCon: "Yes",
+        lastServiced: "5 weeks ago", insurance: "Standard waiver · R5,000 excess", cancellation: "Free up to 24h before pickup",
+      },
+      {
+        id: "c-cpt-2", name: "Ford Ranger", type: "Pickup 4x4", pickup: "V&A Waterfront", seats: 5, transmission: "Automatic",
+        perks: "Garden Route ready", price: 88,
+        image: "/images/c-cpt-2.jpg",
+        condition: "Excellent", conditionNote: "Recently added to the fleet with a canopy and roof rack; underbody checked after every long-route rental.",
+        year: 2025, mileage: "12,300 km", fuel: "Diesel · 7.6 L/100km", luggage: "6 large bags", airCon: "Dual-zone climate",
+        lastServiced: "10 days ago", insurance: "Super cover · Zero excess", cancellation: "Free up to 48h before pickup",
+      },
     ],
     stays: [
-      { id: "h-cpt-1", name: "Camps Bay Beach House", kind: "Villa", area: "Camps Bay", rating: 4.8, perks: "Ocean-front · Private pool", price: 295 },
-      { id: "h-cpt-2", name: "The Silo District Hotel", kind: "Design hotel", area: "V&A Waterfront", rating: 4.9, perks: "Rooftop pool · Museum access", price: 380 },
+      {
+        id: "h-cpt-1", name: "Camps Bay Beach House", kind: "Villa", area: "Camps Bay", rating: 4.8,
+        perks: "Ocean-front · Private pool", price: 295,
+        image: "/images/h-cpt-1.jpg",
+        condition: "Excellent", conditionNote: "Privately owned villa kept to a high standard; new outdoor furniture and repainted deck this season.",
+        renovated: "Renovated 2024", roomType: "Whole villa · 3 bedrooms", roomSize: "210 m²", beds: "2 king + 2 twin", maxGuests: 6,
+        view: "Atlantic Ocean and Twelve Apostles", amenities: ["Private pool", "Braai deck", "Parking", "Free Wi-Fi", "Housekeeping", "Smart TV"],
+        cleanliness: 9.7, checkIn: "15:00", checkOut: "10:00", cancellation: "Free cancellation up to 14 days before arrival",
+      },
+      {
+        id: "h-cpt-2", name: "The Silo District Hotel", kind: "Design hotel", area: "V&A Waterfront", rating: 4.9,
+        perks: "Rooftop pool · Museum access", price: 380,
+        image: "/images/h-cpt-2.jpg",
+        condition: "Excellent", conditionNote: "Converted grain silo in pristine condition — signature faceted windows serviced annually.",
+        renovated: "Converted 2017, refreshed 2024", roomType: "Silo deluxe room", roomSize: "40 m²", beds: "1 king bed", maxGuests: 2,
+        view: "Harbour and Table Mountain", amenities: ["Rooftop pool", "Zeitz MOCAA access", "Spa", "Restaurant", "Free Wi-Fi", "Valet parking"],
+        cleanliness: 9.8, checkIn: "14:00", checkOut: "11:00", cancellation: "Free cancellation up to 7 days before arrival",
+      },
     ],
   },
   {
@@ -203,12 +348,42 @@ export const DESTINATIONS: Destination[] = [
       { id: "f-rio-2", airline: "American Airlines", route: "JFK → GIG", depart: "21:50", arrive: "10:15 +1", duration: "9h 25m", stops: "Nonstop", cabin: "Premium", price: 1420 },
     ],
     cars: [
-      { id: "c-rio-1", name: "Chevrolet Onix", type: "Compact", pickup: "Galeão Airport (GIG)", seats: 5, transmission: "Automatic", perks: "Toll tag included", price: 34 },
-      { id: "c-rio-2", name: "Private driver, full day", type: "Chauffeur", pickup: "Hotel lobby", seats: 4, transmission: "Automatic", perks: "8 hours · English speaking", price: 160 },
+      {
+        id: "c-rio-1", name: "Chevrolet Onix", type: "Compact", pickup: "Galeão Airport (GIG)", seats: 5, transmission: "Automatic",
+        perks: "Toll tag included", price: 34,
+        image: "/images/c-rio-1.jpg",
+        condition: "Very good", conditionNote: "Clean city car with light wear on the driver's seat bolster; alignment and brakes checked last service.",
+        year: 2023, mileage: "57,400 km", fuel: "Flex fuel · 6.0 L/100km", luggage: "2 large bags", airCon: "Yes",
+        lastServiced: "1 month ago", insurance: "Standard cover · R$3,000 excess", cancellation: "Free up to 24h before pickup",
+      },
+      {
+        id: "c-rio-2", name: "Private driver, full day", type: "Chauffeur", pickup: "Hotel lobby", seats: 4, transmission: "Automatic",
+        perks: "8 hours · English speaking", price: 160,
+        image: "/images/c-rio-2.jpg",
+        condition: "Excellent", conditionNote: "Executive sedan detailed daily; bottled water, phone chargers and child seat on request.",
+        year: 2025, mileage: "21,000 km", fuel: "Petrol · 8.0 L/100km", luggage: "3 large bags", airCon: "Rear climate control",
+        lastServiced: "2 weeks ago", insurance: "Fully insured with driver", cancellation: "Free up to 48h before pickup",
+      },
     ],
     stays: [
-      { id: "h-rio-1", name: "Copacabana Palace", kind: "Historic hotel", area: "Copacabana", rating: 4.9, perks: "1923 landmark · Beachfront pool", price: 520 },
-      { id: "h-rio-2", name: "Ipanema Surf Loft", kind: "Apartment", area: "Ipanema", rating: 4.5, perks: "Two blocks from the sand", price: 140 },
+      {
+        id: "h-rio-1", name: "Copacabana Palace", kind: "Historic hotel", area: "Copacabana", rating: 4.9,
+        perks: "1923 landmark · Beachfront pool", price: 520,
+        image: "/images/h-rio-1.jpg",
+        condition: "Excellent", conditionNote: "Heritage landmark maintained to museum standard; suites restored with period detailing intact.",
+        renovated: "Restored 2023", roomType: "Deluxe ocean room", roomSize: "45 m²", beds: "1 king bed", maxGuests: 2,
+        view: "Copacabana beach", amenities: ["Beachfront pool", "Spa", "Fine dining", "Gym", "Free Wi-Fi", "Butler service"],
+        cleanliness: 9.9, checkIn: "15:00", checkOut: "12:00", cancellation: "Free cancellation up to 7 days before arrival",
+      },
+      {
+        id: "h-rio-2", name: "Ipanema Surf Loft", kind: "Apartment", area: "Ipanema", rating: 4.5,
+        perks: "Two blocks from the sand", price: 140,
+        image: "/images/h-rio-2.jpg",
+        condition: "Good", conditionNote: "Bright, casual loft; salt air has aged the window frames but interiors were repainted this year.",
+        renovated: "Refreshed 2025", roomType: "Studio loft", roomSize: "38 m²", beds: "1 queen bed", maxGuests: 2,
+        view: "Street and rooftops", amenities: ["Kitchenette", "Board storage", "Balcony", "Free Wi-Fi", "Air conditioning"],
+        cleanliness: 8.9, checkIn: "14:00", checkOut: "11:00", cancellation: "Free cancellation up to 3 days before arrival",
+      },
     ],
   },
   {
@@ -235,12 +410,42 @@ export const DESTINATIONS: Destination[] = [
       { id: "f-bal-2", airline: "Qatar Airways", route: "LAX → DOH → DPS", depart: "16:25", arrive: "23:10 +2", duration: "24h 45m", stops: "1 stop", cabin: "Economy", price: 960 },
     ],
     cars: [
-      { id: "c-bal-1", name: "Toyota Avanza", type: "Small MPV", pickup: "Ngurah Rai Airport (DPS)", seats: 7, transmission: "Manual", perks: "Cheap · Good for families", price: 22 },
-      { id: "c-bal-2", name: "Scooter + helmets", type: "Scooter", pickup: "Canggu, delivered", seats: 2, transmission: "Automatic", perks: "Delivered to your villa", price: 7 },
+      {
+        id: "c-bal-1", name: "Toyota Avanza", type: "Small MPV", pickup: "Ngurah Rai Airport (DPS)", seats: 7, transmission: "Manual",
+        perks: "Cheap · Good for families", price: 22,
+        image: "/images/c-bal-1.jpg",
+        condition: "Good", conditionNote: "Popular island workhorse; some wear on the third-row seats, engine and brakes recently serviced.",
+        year: 2022, mileage: "88,600 km", fuel: "Petrol · 6.8 L/100km", luggage: "3 large bags", airCon: "Front and rear vents",
+        lastServiced: "3 weeks ago", insurance: "Basic cover · Rp 3,000,000 excess", cancellation: "Free up to 24h before pickup",
+      },
+      {
+        id: "c-bal-2", name: "Scooter + helmets", type: "Scooter", pickup: "Canggu, delivered", seats: 2, transmission: "Automatic",
+        perks: "Delivered to your villa", price: 7,
+        image: "/images/c-bal-2.jpg",
+        condition: "Very good", conditionNote: "Well-maintained 125cc automatic, new tyres and brake pads, two clean helmets and a phone mount included.",
+        year: 2024, mileage: "14,200 km", fuel: "Petrol · 2.1 L/100km", luggage: "Under-seat storage", airCon: "N/A",
+        lastServiced: "2 weeks ago", insurance: "Third-party only · Helmet required", cancellation: "Free up to 12h before delivery",
+      },
     ],
     stays: [
-      { id: "h-bal-1", name: "Ubud Jungle Villas", kind: "Villa resort", area: "Ubud", rating: 4.8, perks: "Private pool · Yoga deck", price: 190 },
-      { id: "h-bal-2", name: "Canggu Surf Retreat", kind: "Resort", area: "Canggu", rating: 4.6, perks: "Board rental · Beach club access", price: 95 },
+      {
+        id: "h-bal-1", name: "Ubud Jungle Villas", kind: "Villa resort", area: "Ubud", rating: 4.8,
+        perks: "Private pool · Yoga deck", price: 190,
+        image: "/images/h-bal-1.jpg",
+        condition: "Excellent", conditionNote: "Teak and stone villas rebuilt in 2024; pools resurfaced and decks re-oiled every dry season.",
+        renovated: "Rebuilt 2024", roomType: "One-bedroom pool villa", roomSize: "75 m²", beds: "1 king bed", maxGuests: 2,
+        view: "Jungle valley", amenities: ["Private pool", "Yoga deck", "Breakfast included", "Spa", "Free Wi-Fi", "Shuttle to Ubud"],
+        cleanliness: 9.6, checkIn: "14:00", checkOut: "12:00", cancellation: "Free cancellation up to 7 days before arrival",
+      },
+      {
+        id: "h-bal-2", name: "Canggu Surf Retreat", kind: "Resort", area: "Canggu", rating: 4.6,
+        perks: "Board rental · Beach club access", price: 95,
+        image: "/images/h-bal-2.jpg",
+        condition: "Very good", conditionNote: "Relaxed surf resort; rooms in solid shape, outdoor bathrooms show natural weathering by design.",
+        renovated: "Refreshed 2023", roomType: "Garden double", roomSize: "28 m²", beds: "1 queen bed", maxGuests: 2,
+        view: "Tropical garden", amenities: ["Surfboard rental", "Beach club access", "Pool", "Café", "Free Wi-Fi", "Scooter parking"],
+        cleanliness: 9.2, checkIn: "14:00", checkOut: "11:00", cancellation: "Free cancellation up to 3 days before arrival",
+      },
     ],
   },
 ];
