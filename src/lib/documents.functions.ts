@@ -3,6 +3,7 @@ import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
+import { PURPOSE_LABEL as PURPOSE_LABELS } from "@/lib/documents-ui";
 
 export type PassportServiceRow = Database["public"]["Tables"]["passport_services"]["Row"];
 export type VisaRuleRow = Database["public"]["Tables"]["visa_rules"]["Row"];
