@@ -63,7 +63,7 @@ export function GuideCard({ guide, city }: { guide: TourGuide; city: string }) {
             <p className="truncate text-xs text-muted-foreground">{guide.title}</p>
             <div className="mt-1.5 flex flex-wrap gap-1">
               {guide.cityWide && (
-                <Badge className="bg-grape text-grape-foreground text-[10px] hover:bg-grape">
+                <Badge className="bg-grape text-sunset-foreground text-[10px] hover:bg-grape">
                   <Globe2 className="mr-1 h-3 w-3" /> Full city tour
                 </Badge>
               )}
@@ -122,7 +122,7 @@ export function GuideCard({ guide, city }: { guide: TourGuide; city: string }) {
               </Badge>
               <Badge variant="secondary" className="text-[11px]">{guide.years} years guiding</Badge>
               {guide.cityWide && (
-                <Badge className="bg-grape text-grape-foreground text-[11px] hover:bg-grape">
+                <Badge className="bg-grape text-sunset-foreground text-[11px] hover:bg-grape">
                   <Globe2 className="mr-1 h-3 w-3" /> Takes you round the whole city
                 </Badge>
               )}
