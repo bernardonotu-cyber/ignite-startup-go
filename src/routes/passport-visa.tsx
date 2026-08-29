@@ -10,8 +10,14 @@ import { TripBasketSheet } from "@/components/travel/trip-basket-sheet";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { DocumentsLayer, VisaCard } from "@/components/travel/documents-layer";
 import { RequirementWizard } from "@/components/travel/requirement-wizard";
+import { VisaTypesGrid } from "@/components/travel/visa-types-grid";
 import { getDocumentsCatalog } from "@/lib/documents.functions";
-import { DEFAULT_ORIGIN, ORIGIN_COUNTRIES } from "@/lib/documents-ui";
+import {
+  DEFAULT_ORIGIN,
+  DEFAULT_PURPOSE,
+  ORIGIN_COUNTRIES,
+  PURPOSE_LABEL,
+} from "@/lib/documents-ui";
 
 type Search = { from?: string; to?: string; purpose?: string };
 
