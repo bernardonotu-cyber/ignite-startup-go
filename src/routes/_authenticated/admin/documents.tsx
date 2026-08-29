@@ -43,7 +43,7 @@ function AdminDocuments() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4">
           <Link to="/" className="press flex items-center gap-2">
             <Logo className="h-6 w-6" />
-            <span className="text-base font-semibold tracking-[0.14em]">BUBOLI admin</span>
+            <span className="text-base font-semibold tracking-[0.14em]">World Portal admin</span>
           </Link>
           <Link to="/dashboard">
             <Button variant="ghost" className="press rounded-full">

@@ -21,13 +21,13 @@ export const Route = createFileRoute("/passport-visa")({
   }),
   head: () => ({
     meta: [
-      { title: "Passport & Visa Services — BUBOLI" },
+      { title: "Passport & Visa Services — World Portal" },
       {
         name: "description",
         content:
           "Tell us where you're travelling from and to, and see instantly whether you need a visa or a passport — then apply and track it in one place.",
       },
-      { property: "og:title", content: "Passport & Visa Services — BUBOLI" },
+      { property: "og:title", content: "Passport & Visa Services — World Portal" },
       {
         property: "og:description",
         content:
@@ -74,7 +74,7 @@ function Page() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 md:px-8">
           <Link to="/" className="press flex items-center gap-2 rounded-full px-4 py-2">
             <Logo className="h-6 w-6" />
-            <span className="text-base font-semibold tracking-[0.14em]">BUBOLI</span>
+            <span className="text-base font-semibold tracking-[0.14em]">World Portal</span>
           </Link>
           <div className="flex items-center gap-2">
             <Link to="/track" className="hidden sm:block">
@@ -182,7 +182,7 @@ function Page() {
       </main>
 
       <footer className="border-t px-4 py-12 text-center text-sm text-muted-foreground md:px-8">
-        © {new Date().getFullYear()} BUBOLI. Built for travelers who like being in control.
+        © {new Date().getFullYear()} World Portal. Built for travelers who like being in control.
       </footer>
     </div>
   );
