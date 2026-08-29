@@ -106,11 +106,14 @@ function ApplyPage() {
             <Logo className="h-6 w-6" />
             <span className="text-base font-semibold tracking-[0.14em]">World Portal</span>
           </Link>
-          <Link to="/passport-visa">
-            <Button variant="ghost" className="press rounded-full">
-              <ArrowLeft className="mr-2 h-4 w-4" /> Back
-            </Button>
-          </Link>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <Link to="/passport-visa">
+              <Button variant="ghost" className="press rounded-full">
+                <ArrowLeft className="mr-2 h-4 w-4" /> Back
+              </Button>
+            </Link>
+          </div>
         </div>
       </header>
 
