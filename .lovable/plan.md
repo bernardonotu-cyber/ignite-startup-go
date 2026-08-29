@@ -1,79 +1,54 @@
-# Plan: Build the Backend for World Portal
+# Plan: Tour Guides inside "Places You Can Visit"
 
-## Where the backend stands today
+Add a tour guide layer to the Places section so that when someone opens a destination and browses the places they can visit, they also see real guides who can take them around — with photos, credentials, languages, and fees — and can add a guide to the basket like any other item.
 
-Part of the backend already exists and works. Verified in the database:
+## What the user sees
 
-- `profiles`, `user_roles` — accounts and admin roles
-- `trips`, `itinerary_days`, `itinerary_activities` — AI trip planner storage
-- `visa_rules`, `passport_services`, `document_applications`, `application_events` — the passport/visa flow with admin-editable pricing and status tracking
+Inside the **Places** tab of a destination (`places-layer.tsx`), each place card gains a **"Guides for this place"** strip below its distance matrix. Expanding a place now reveals two things: how close everything else is (already there), and who can take you there.
 
-So the **documents side is fully backed by the database.** The **travel shopping side is not.**
+Each guide appears as a card with:
 
-## What is actually missing
+- **Photo** of the guide
+- **Name and title** (e.g. "Nikos Alexiou · Licensed Caldera Guide")
+- **Rating and tour count** (e.g. 4.9 · 340 tours)
+- **Languages spoken** (flag-free text badges: English, Greek, French)
+- **Years of experience** and a short bio line
+- **Specialty tags** matching the place category (Archaeology, Food, Photography, Hiking)
+- **Fee** — priced per half-day, full-day, or per-person depending on the guide
+- **Group size** they take and what's included (transport, entrance fees, lunch)
+- **Add to basket** button with the same ripple/pop behaviour as every other add button
 
-1. **All travel inventory is hardcoded in the frontend.** `src/lib/travel-catalog.ts` (destinations, flights, cars, stays), `src/lib/places-catalog.ts` (attractions, fees, coordinates), and `src/lib/posts-catalog.ts` (Traveler Moments) are static TypeScript arrays. Nothing can be added, priced, or edited without a code change.
-2. **The basket is browser-only.** `src/lib/trip-basket.tsx` saves to `localStorage`. Clear the browser or switch device and the trip is gone. Nothing is ever recorded server-side.
-3. **There is no checkout.** A user can build a full basket and there is no way to submit it, no order, no reference number, no record for you to fulfil.
+Clicking a guide card opens a **detail dialog** — same pattern as the existing car and stay cards in `vehicle-stay-detail.tsx` — showing the large photo, full bio, full itinerary of what the tour covers, the places they guide, cancellation policy, and the add button.
 
-## What to build
+## Coverage
 
-### 1. Move the travel catalog into the database
+Every one of the 6 destinations gets guides: Santorini, Tokyo, Marrakech, Cape Town, Rio, Bali.
 
-New tables, each with RLS and grants:
+Guides are attached to **specific places**, not just the city. A Santorini archaeology guide shows under Akrotiri Excavations and Ancient Thera; a sunset photography guide shows under Oia Sunset Castle and Amoudi Bay. So every place has at least one relevant guide, and popular places have two or three.
 
-- `destinations` — country/city, blurb, hero image, accent color, best season, currency, language, sort order, `active`
-- `flights` — linked to destination: airline, route, times, cabin, price, tags
-- `cars` — linked to destination: model, category, images, mileage, service history, fuel, insurance, condition rating, daily price
-- `stays` — linked to destination: name, type (hotel/resort/villa), images, room size, beds, amenities, condition rating, nightly price
-- `places` — linked to destination: name, category, latitude, longitude, entrance fee (nullable = free), opening hours, description, image
+Some guides are **city-wide** ("takes you round the whole city") and show on every place in that destination, marked with a "Full city tour" badge — this is the option for someone who wants one guide for everything rather than per-site.
 
-Public read access via `anon` SELECT on `active` rows; writes restricted to admins through the existing `has_role` function.
+## Also added
 
-The current hardcoded arrays get seeded into these tables as literal INSERT rows in the migration, so the site looks identical the moment it switches over — nothing goes blank.
+A **Guides tab** at the destination level, alongside Flights / Cars / Stays / Places, listing every guide for that city in one place for people who want to browse guides first and pick places after.
 
-### 2. Traveler Moments becomes real
+## Technical notes
 
-- `traveler_posts` table — author, avatar, image, caption, destination, tagged place, created date, `published` flag.
-- Seeded from the existing posts so the feed keeps working.
-- Later this is what lets real users post their own moments.
+- New `src/lib/guides-catalog.ts` — `TourGuide` type (`id`, `name`, `title`, `image`, `bio`, `rating`, `tours`, `years`, `languages[]`, `specialties[]`, `placeIds[]`, `cityWide`, `fee`, `feeUnit`, `groupSize`, `includes[]`, `cancellation`) plus a `GUIDES: Record<destinationId, TourGuide[]>` map and a `guidesForPlace(destinationId, placeId)` helper that merges place-specific and city-wide guides.
+- Generate guide portraits into `public/images/guide-*.jpg` — roughly 3 guides per destination, 18 total, each looking regionally appropriate and professional.
+- New `src/components/travel/guide-card.tsx` with `GuideCard` (compact strip card) and `GuideDetailDialog` (nested dialog, matching the car/stay dialog pattern).
+- Extend `places-layer.tsx`: when a place is selected, render the guides strip under the existing distance matrix.
+- Add a `guide` kind to `BasketItem` in `trip-basket.tsx` and a matching icon/label in the basket sheet.
+- Styling uses existing design tokens only — works in both the black-and-gold and colourful light themes, no hardcoded colours.
 
-### 3. Persist the basket and add checkout
+## Still pending
 
-- `baskets` / `basket_items` — a signed-in user's basket saves to the database and follows them across devices. Guests keep using `localStorage`, and the basket **merges into their account on sign-in** so nothing is lost.
-- `bookings` and `booking_items` — checkout snapshots the basket into an immutable order with a reference code (same pattern as the existing document applications), a total, traveler details, and a status.
-- `booking_events` — status timeline, mirroring `application_events`, so users can track a booking the same way they track a visa.
-
-### 4. Server functions
-
-New `src/lib/catalog.functions.ts` and `src/lib/bookings.functions.ts`:
-
-- Public reads: destinations with their flights/cars/stays/places, and the traveler feed.
-- Authenticated: load/save basket, submit checkout, list my bookings, track one booking by reference.
-- Admin-only: create/update/deactivate any catalog row, list all bookings, advance a booking's status.
-
-Prices are always recalculated server-side from the database at checkout — never trusted from the client.
-
-### 5. Admin console extension
-
-Extend the existing admin dashboard with tabs to manage destinations, flights, cars, stays, places, traveler posts, and incoming bookings — matching how visa rules and passport pricing are already managed today.
-
-### 6. Frontend rewiring
-
-Swap the static imports for loader-backed queries. The destination explorer, category feeds, places layer, moments feed, and basket all read live data. Component structure, styling, animations, and both themes are untouched — this is a data-source swap, not a redesign.
-
-## Explicitly not in this plan
-
-**Real payments.** Checkout will produce a booking with a total and a reference code, but will not charge a card. Wiring Stripe or Paddle is a separate step — say the word and I'll plan it after this lands.
-
-## Still pending from before
-
-The earlier plan covered two other items you asked about — extending the ripple animation across the home page, and exporting the code via GitHub sync so someone else can host and edit it. Those are independent of this backend work and can be done before or after. Tell me if you want them folded into this build or handled separately.
+The backend plan (moving the catalog, basket, and checkout into the database) and the earlier ripple/code-export items are still unapproved. If the backend build goes ahead, guides become a `tour_guides` table seeded from this catalog — the same swap as every other catalog. Building guides as a catalog first means nothing has to be redone.
 
 ## Verification
 
-- Confirm every new public table has RLS enabled plus explicit GRANTs.
-- Load the home page and confirm destinations, cars, stays, places, and moments all render from the database with the same content as before.
-- Build a basket signed out, sign in, and confirm it merged rather than vanished.
-- Complete a checkout and confirm the booking, its items, and its first timeline event all appear in the database and in the admin console.
-- Attempt an admin-only write as a normal user and confirm it is rejected.
+- Open each of the 6 destinations, select every place, and confirm at least one guide appears with a loaded photo.
+- Confirm city-wide guides appear on all places in their destination and carry the badge.
+- Open a guide detail dialog from inside the destination modal and confirm the nested dialog stacks correctly and closes cleanly.
+- Add a guide to the basket and confirm it appears with the right price and label.
+- Check both themes for contrast and layout.
