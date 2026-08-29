@@ -273,7 +273,7 @@
     100deg,
     var(--sunset),
     var(--mango) 45%,
-    var(--lagoon)
+    var(--lagoon) 85%
   );
   background-clip: text;
   color: transparent;
