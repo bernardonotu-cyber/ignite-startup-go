@@ -14,6 +14,128 @@ export type Database = {
   }
   public: {
     Tables: {
+      application_events: {
+        Row: {
+          application_id: string
+          created_at: string
+          id: string
+          note: string | null
+          status: Database["public"]["Enums"]["application_status"]
+        }
+        Insert: {
+          application_id: string
+          created_at?: string
+          id?: string
+          note?: string | null
+          status: Database["public"]["Enums"]["application_status"]
+        }
+        Update: {
+          application_id?: string
+          created_at?: string
+          id?: string
+          note?: string | null
+          status?: Database["public"]["Enums"]["application_status"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "application_events_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "document_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      document_applications: {
+        Row: {
+          admin_note: string | null
+          created_at: string
+          destination_country: string | null
+          email: string
+          full_name: string
+          id: string
+          kind: string
+          nationality: string | null
+          notes: string | null
+          origin_country: string | null
+          passport_number: string | null
+          passport_service_id: string | null
+          phone: string | null
+          price: number
+          reference: string
+          service_name: string
+          status: Database["public"]["Enums"]["application_status"]
+          travel_date: string | null
+          travelers: number
+          updated_at: string
+          user_id: string
+          visa_rule_id: string | null
+        }
+        Insert: {
+          admin_note?: string | null
+          created_at?: string
+          destination_country?: string | null
+          email: string
+          full_name: string
+          id?: string
+          kind: string
+          nationality?: string | null
+          notes?: string | null
+          origin_country?: string | null
+          passport_number?: string | null
+          passport_service_id?: string | null
+          phone?: string | null
+          price?: number
+          reference: string
+          service_name: string
+          status?: Database["public"]["Enums"]["application_status"]
+          travel_date?: string | null
+          travelers?: number
+          updated_at?: string
+          user_id: string
+          visa_rule_id?: string | null
+        }
+        Update: {
+          admin_note?: string | null
+          created_at?: string
+          destination_country?: string | null
+          email?: string
+          full_name?: string
+          id?: string
+          kind?: string
+          nationality?: string | null
+          notes?: string | null
+          origin_country?: string | null
+          passport_number?: string | null
+          passport_service_id?: string | null
+          phone?: string | null
+          price?: number
+          reference?: string
+          service_name?: string
+          status?: Database["public"]["Enums"]["application_status"]
+          travel_date?: string | null
+          travelers?: number
+          updated_at?: string
+          user_id?: string
+          visa_rule_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "document_applications_passport_service_id_fkey"
+            columns: ["passport_service_id"]
+            isOneToOne: false
+            referencedRelation: "passport_services"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_applications_visa_rule_id_fkey"
+            columns: ["visa_rule_id"]
+            isOneToOne: false
+            referencedRelation: "visa_rules"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       itinerary_activities: {
         Row: {
           booking_link: string | null
@@ -99,6 +221,54 @@ export type Database = {
           },
         ]
       }
+      passport_services: {
+        Row: {
+          accent: string
+          active: boolean
+          blurb: string
+          created_at: string
+          documents: string[]
+          id: string
+          name: string
+          price: number
+          processing: string
+          slug: string
+          sort_order: number
+          updated_at: string
+          validity: string
+        }
+        Insert: {
+          accent?: string
+          active?: boolean
+          blurb?: string
+          created_at?: string
+          documents?: string[]
+          id?: string
+          name: string
+          price?: number
+          processing?: string
+          slug: string
+          sort_order?: number
+          updated_at?: string
+          validity?: string
+        }
+        Update: {
+          accent?: string
+          active?: boolean
+          blurb?: string
+          created_at?: string
+          documents?: string[]
+          id?: string
+          name?: string
+          price?: number
+          processing?: string
+          slug?: string
+          sort_order?: number
+          updated_at?: string
+          validity?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -171,14 +341,104 @@ export type Database = {
         }
         Relationships: []
       }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      visa_rules: {
+        Row: {
+          active: boolean
+          created_at: string
+          destination_country: string
+          destination_id: string | null
+          documents: string[]
+          entries: string
+          fee: number
+          id: string
+          note: string
+          origin_country: string
+          processing: string
+          requirement: string
+          stay: string
+          type_label: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          destination_country: string
+          destination_id?: string | null
+          documents?: string[]
+          entries?: string
+          fee?: number
+          id?: string
+          note?: string
+          origin_country?: string
+          processing?: string
+          requirement?: string
+          stay?: string
+          type_label?: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          destination_country?: string
+          destination_id?: string | null
+          documents?: string[]
+          entries?: string
+          fee?: number
+          id?: string
+          note?: string
+          origin_country?: string
+          processing?: string
+          requirement?: string
+          stay?: string
+          type_label?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
+      app_role: "admin" | "moderator" | "user"
+      application_status:
+        | "submitted"
+        | "in_review"
+        | "at_embassy"
+        | "decision"
+        | "ready"
+        | "delivered"
+        | "rejected"
       trip_status: "draft" | "planned" | "archived"
     }
     CompositeTypes: {
@@ -307,6 +567,16 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      app_role: ["admin", "moderator", "user"],
+      application_status: [
+        "submitted",
+        "in_review",
+        "at_embassy",
+        "decision",
+        "ready",
+        "delivered",
+        "rejected",
+      ],
       trip_status: ["draft", "planned", "archived"],
     },
   },
