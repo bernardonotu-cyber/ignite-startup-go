@@ -329,6 +329,7 @@ function VisaRow({
   onDone: () => void;
 }) {
   const [form, setForm] = useState({
+    purpose: r.purpose,
     type_label: r.type_label,
     requirement: r.requirement,
     stay: r.stay,
