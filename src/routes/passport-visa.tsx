@@ -51,7 +51,7 @@ function PassportVisaPage() {
 }
 
 function Page() {
-  const { from, to } = Route.useSearch();
+  const { from, to, purpose } = Route.useSearch();
   const fetchCatalog = useServerFn(getDocumentsCatalog);
   const { data, isLoading } = useQuery({
     queryKey: ["documents-catalog"],
