@@ -267,11 +267,9 @@ export const adminUpdateVisaRule = createServerFn({ method: "POST" })
   )
   .handler(async ({ data, context }) => {
     const { id, purpose, ...rest } = data;
-    const patch: Record<string, unknown> = { ...rest };
-    if (purpose) {
-      patch.purpose = purpose;
-      patch.purpose_label = PURPOSE_LABELS[purpose];
-    }
+    const patch = purpose
+      ? { ...rest, purpose, purpose_label: PURPOSE_LABELS[purpose] ?? purpose }
+      : rest;
     const { error } = await context.supabase.from("visa_rules").update(patch).eq("id", id);
     if (error) throw error;
     return { ok: true };
