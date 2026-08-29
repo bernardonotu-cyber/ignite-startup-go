@@ -30,7 +30,7 @@ function TrackApplication() {
         <div className="mx-auto flex max-w-3xl items-center justify-between px-4">
           <Link to="/" className="press flex items-center gap-2">
             <Logo className="h-6 w-6" />
-            <span className="text-base font-semibold tracking-[0.14em]">BUBOLI</span>
+            <span className="text-base font-semibold tracking-[0.14em]">World Portal</span>
           </Link>
           <Link to="/documents">
             <Button variant="ghost" className="press rounded-full">

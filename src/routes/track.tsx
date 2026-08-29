@@ -7,13 +7,13 @@ import { Logo } from "@/components/logo";
 export const Route = createFileRoute("/track")({
   head: () => ({
     meta: [
-      { title: "Track Your Passport or Visa Application — BUBOLI" },
+      { title: "Track Your Passport or Visa Application — World Portal" },
       {
         name: "description",
         content:
-          "Enter your BUBOLI reference code to see exactly where your passport or visa application is, from submission to delivery.",
+          "Enter your World Portal reference code to see exactly where your passport or visa application is, from submission to delivery.",
       },
-      { property: "og:title", content: "Track Your Passport or Visa Application — BUBOLI" },
+      { property: "og:title", content: "Track Your Passport or Visa Application — World Portal" },
       {
         property: "og:description",
         content: "Live status updates for your travel document application, step by step.",
@@ -35,7 +35,7 @@ function TrackLookup() {
         <div className="mx-auto flex max-w-3xl items-center justify-between px-4">
           <Link to="/" className="press flex items-center gap-2">
             <Logo className="h-6 w-6" />
-            <span className="text-base font-semibold tracking-[0.14em]">BUBOLI</span>
+            <span className="text-base font-semibold tracking-[0.14em]">World Portal</span>
           </Link>
           <Link to="/passport-visa">
             <Button variant="ghost" className="press rounded-full">

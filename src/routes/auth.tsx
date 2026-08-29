@@ -12,10 +12,10 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Sign in — BUBOLI" },
-      { name: "description", content: "Sign in to BUBOLI to plan and manage your trips." },
-      { property: "og:title", content: "Sign in — BUBOLI" },
-      { property: "og:description", content: "Sign in to BUBOLI." },
+      { title: "Sign in — World Portal" },
+      { name: "description", content: "Sign in to World Portal to plan and manage your trips." },
+      { property: "og:title", content: "Sign in — World Portal" },
+      { property: "og:description", content: "Sign in to World Portal." },
     ],
   }),
   component: AuthPage,
@@ -72,7 +72,7 @@ function AuthPage() {
       <div className="w-full max-w-md">
         <Link to="/" className="mb-8 flex items-center justify-center gap-2 text-foreground">
           <Logo className="h-7 w-7" />
-          <span className="text-lg font-semibold">BUBOLI</span>
+          <span className="text-lg font-semibold">World Portal</span>
         </Link>
         <Card className="p-8">
           <h1 className="text-2xl font-semibold tracking-tight">

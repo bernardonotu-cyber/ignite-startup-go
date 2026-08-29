@@ -20,13 +20,13 @@ import { Sparkles, Plane, Car, Hotel, MapPin, Search, Compass, Ticket, ArrowRigh
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "BUBOLI — Explore, Shop and Build Your Whole Trip" },
+      { title: "World Portal — Explore, Shop and Build Your Whole Trip" },
       {
         name: "description",
         content:
           "Explore destinations with real history and photos, then add flights, car rentals and hotels to your trip basket — and build your journey piece by piece.",
       },
-      { property: "og:title", content: "BUBOLI — Explore, Shop and Build Your Whole Trip" },
+      { property: "og:title", content: "World Portal — Explore, Shop and Build Your Whole Trip" },
       {
         property: "og:description",
         content: "A social way to explore places, compare flights, cars and stays, and build your trip like a shopping basket.",
@@ -99,7 +99,7 @@ function Landing() {
             }`}
           >
             <Logo className="h-6 w-6" />
-            <span className="text-base font-semibold tracking-[0.14em]">BUBOLI</span>
+            <span className="text-base font-semibold tracking-[0.14em]">World Portal</span>
           </div>
           <nav
             className={`hidden items-center gap-1 rounded-full px-2 py-1.5 text-sm transition-colors duration-500 md:flex ${
@@ -338,7 +338,7 @@ function Landing() {
             Turn your basket into a real itinerary
           </h2>
           <p className="mx-auto mt-5 max-w-xl leading-relaxed text-white/85">
-            When your trip feels right, BUBOLI's AI turns everything you picked into a day-by-day plan
+            When your trip feels right, World Portal's AI turns everything you picked into a day-by-day plan
             with timings, costs and local tips.
           </p>
           <div className="mt-9 flex flex-wrap justify-center gap-3">
@@ -357,7 +357,7 @@ function Landing() {
       </section>
 
       <footer className="border-t px-4 py-12 text-center text-sm text-muted-foreground md:px-8">
-        © {new Date().getFullYear()} BUBOLI. Built for travelers who like being in control.
+        © {new Date().getFullYear()} World Portal. Built for travelers who like being in control.
       </footer>
     </div>
   );
