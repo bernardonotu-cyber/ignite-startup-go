@@ -7,6 +7,7 @@ import { Logo } from "@/components/logo";
 import { Reveal } from "@/components/reveal";
 import { TripBasketProvider } from "@/lib/trip-basket";
 import { TripBasketSheet } from "@/components/travel/trip-basket-sheet";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { DocumentsLayer, VisaCard } from "@/components/travel/documents-layer";
 import { RequirementWizard } from "@/components/travel/requirement-wizard";
 import { getDocumentsCatalog } from "@/lib/documents.functions";
@@ -87,6 +88,7 @@ function Page() {
                 <ArrowLeft className="mr-2 h-4 w-4" /> Back to explore
               </Button>
             </Link>
+            <ThemeToggle />
             <TripBasketSheet />
           </div>
         </div>
