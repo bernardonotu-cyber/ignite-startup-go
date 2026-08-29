@@ -58,7 +58,7 @@ function ApplyPage() {
       .filter((r) => r.requirement !== "visa_free")
       .map((r) => ({
         id: r.id,
-        label: `${r.destination_country} — ${r.type_label} (from ${r.origin_country})`,
+        label: `${r.destination_country} — ${r.type_label} · ${r.purpose_label}`,
         price: Number(r.fee),
         meta: `${r.processing} · stay ${r.stay}`,
       }));
