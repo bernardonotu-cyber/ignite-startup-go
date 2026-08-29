@@ -1,4 +1,4 @@
-import { Plane, Trash2, Hotel, Car, MapPin, Sparkles, Ticket, BookUser } from "lucide-react";
+import { Plane, Trash2, Hotel, Car, MapPin, Sparkles, Ticket, BookUser, UserRound } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
