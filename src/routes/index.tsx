@@ -10,6 +10,8 @@ import { TripBasketSheet } from "@/components/travel/trip-basket-sheet";
 import { DestinationExplorer } from "@/components/travel/destination-explorer";
 import { FlightFeed, CarFeed, StayFeed } from "@/components/travel/category-feeds";
 import { TravelerFeed } from "@/components/travel/traveler-feed";
+import { RequirementWizard } from "@/components/travel/requirement-wizard";
+
 
 import { DESTINATIONS } from "@/lib/travel-catalog";
 import { HeroPlane, ScrollPlane } from "@/components/travel/plane-flight";
