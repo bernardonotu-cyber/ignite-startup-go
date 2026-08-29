@@ -101,6 +101,9 @@ export function VisaCard({ v }: { v: VisaRuleRow }) {
       </div>
 
       <div className="mt-4 flex flex-wrap gap-1.5">
+        <Badge className="bg-grape/15 text-grape hover:bg-grape/20 text-[11px] font-normal">
+          {v.purpose_label}
+        </Badge>
         <Badge variant="outline" className="text-[11px] font-normal">
           <Clock className="mr-1 h-3 w-3" /> {v.processing}
         </Badge>
