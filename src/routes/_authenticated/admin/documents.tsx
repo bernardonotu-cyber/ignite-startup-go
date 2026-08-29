@@ -371,8 +371,29 @@ function VisaRow({
     <div className="rounded-2xl border bg-card p-5">
       <p className="text-sm font-medium">
         {r.origin_country} → {r.destination_country}
+        <Badge variant="secondary" className="ml-2 text-[11px] font-normal">
+          {r.purpose_label}
+        </Badge>
       </p>
       <div className="mt-3 grid gap-3 md:grid-cols-4">
+        <div>
+          <Label>Purpose of travel</Label>
+          <Select
+            value={form.purpose}
+            onValueChange={(v) => setForm({ ...form, purpose: v })}
+          >
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {TRAVEL_PURPOSES.map((p) => (
+                <SelectItem key={p.value} value={p.value}>
+                  {p.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
         <div>
           <Label>Label</Label>
           <Input
