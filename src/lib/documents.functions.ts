@@ -249,6 +249,9 @@ export const adminUpdateVisaRule = createServerFn({ method: "POST" })
     z
       .object({
         id: z.string().uuid(),
+        purpose: z
+          .enum(["tourism", "business", "study", "work", "family", "medical", "transit"])
+          .optional(),
         type_label: z.string().trim().min(2).max(80),
         requirement: z.string().trim().max(40),
         stay: z.string().trim().max(80),
