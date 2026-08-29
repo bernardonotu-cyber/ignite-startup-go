@@ -123,9 +123,10 @@ export function Row({
 function DestinationDetail({ d }: { d: Destination }) {
   return (
     <Tabs defaultValue="story" className="w-full">
-      <TabsList className="grid w-full grid-cols-5">
+      <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6">
         <TabsTrigger value="story">Story</TabsTrigger>
         <TabsTrigger value="places">Places</TabsTrigger>
+        <TabsTrigger value="guides">Guides</TabsTrigger>
         <TabsTrigger value="flights">Flights</TabsTrigger>
         <TabsTrigger value="cars">Cars</TabsTrigger>
         <TabsTrigger value="stays">Stays</TabsTrigger>
@@ -134,6 +135,19 @@ function DestinationDetail({ d }: { d: Destination }) {
       <TabsContent value="places">
         <PlacesLayer destinationId={d.id} city={d.city} />
       </TabsContent>
+
+      <TabsContent value="guides" className="space-y-4 pt-4">
+        <p className="text-sm text-muted-foreground">
+          Licensed local guides in {d.city} — some cover specific sites, others take you round the whole city.
+        </p>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {guidesForDestination(d.id).map((g) => (
+            <GuideCard key={g.id} guide={g} city={d.city} />
+          ))}
+        </div>
+      </TabsContent>
+
+
 
 
 
