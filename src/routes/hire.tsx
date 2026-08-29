@@ -3,7 +3,6 @@ import { ArrowLeft, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/logo";
 import { Reveal } from "@/components/reveal";
-import { TripBasketProvider } from "@/lib/trip-basket";
 import { TripBasketSheet } from "@/components/travel/trip-basket-sheet";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { HireExplorer } from "@/components/travel/hire-explorer";
@@ -32,7 +31,6 @@ export const Route = createFileRoute("/hire")({
 
 function HirePage() {
   return (
-    <TripBasketProvider>
       <div className="min-h-screen bg-background text-foreground">
         <header className="sticky top-0 z-40 w-full border-b bg-background/80 py-2 backdrop-blur-xl">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-4 md:px-8">
@@ -80,6 +78,5 @@ function HirePage() {
           © {new Date().getFullYear()} World Portal. Built for travelers who like being in control.
         </footer>
       </div>
-    </TripBasketProvider>
   );
 }

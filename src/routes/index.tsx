@@ -5,7 +5,6 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Logo } from "@/components/logo";
 import { Reveal } from "@/components/reveal";
-import { TripBasketProvider } from "@/lib/trip-basket";
 import { TripBasketSheet } from "@/components/travel/trip-basket-sheet";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { DestinationExplorer } from "@/components/travel/destination-explorer";
@@ -41,9 +40,7 @@ export const Route = createFileRoute("/")({
 
 function LandingPage() {
   return (
-    <TripBasketProvider>
       <Landing />
-    </TripBasketProvider>
   );
 }
 
