@@ -62,12 +62,26 @@ function Page() {
   const rules = data?.rules ?? [];
 
   const origin = from && ORIGIN_COUNTRIES.includes(from) ? from : DEFAULT_ORIGIN;
-  const matches =
+  const activePurpose = purpose && PURPOSE_LABEL[purpose] ? purpose : DEFAULT_PURPOSE;
+
+  const pool =
     from && to
       ? rules.filter(
-          (r) => r.origin_country === origin && r.destination_country.startsWith(to),
+          (r) =>
+            r.destination_country.startsWith(to) &&
+            (r.origin_country === origin || r.origin_country === DEFAULT_ORIGIN),
         )
       : [];
+
+  const pick = (p: string) => {
+    const all = pool.filter((r) => r.purpose === p);
+    const specific = all.filter((r) => r.origin_country === origin);
+    return specific.length ? specific : all;
+  };
+
+  const purposeMatches = pick(activePurpose);
+  const fellBack = purposeMatches.length === 0 && activePurpose !== DEFAULT_PURPOSE;
+  const matches = purposeMatches.length ? purposeMatches : pick(DEFAULT_PURPOSE);
   const visaFree = matches.length > 0 && matches.every((r) => r.requirement === "visa_free");
 
   return (
