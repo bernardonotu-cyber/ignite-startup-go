@@ -1,26 +1,37 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import { ArrowLeft, CheckCircle2, AlertTriangle, BookUser } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/logo";
 import { Reveal } from "@/components/reveal";
 import { TripBasketProvider } from "@/lib/trip-basket";
 import { TripBasketSheet } from "@/components/travel/trip-basket-sheet";
-import { DocumentsLayer } from "@/components/travel/documents-layer";
+import { DocumentsLayer, VisaCard } from "@/components/travel/documents-layer";
+import { RequirementWizard } from "@/components/travel/requirement-wizard";
+import { getDocumentsCatalog } from "@/lib/documents.functions";
+import { DEFAULT_ORIGIN, ORIGIN_COUNTRIES } from "@/lib/documents-ui";
+
+type Search = { from?: string; to?: string };
 
 export const Route = createFileRoute("/passport-visa")({
+  validateSearch: (search: Record<string, unknown>): Search => ({
+    from: typeof search.from === "string" ? search.from.slice(0, 60) : undefined,
+    to: typeof search.to === "string" ? search.to.slice(0, 60) : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Passport & Visa Services — BUBOLI" },
       {
         name: "description",
         content:
-          "Sort out your travel documents before you book: passport applications, renewals and express services, plus visa rules, fees and requirements per destination.",
+          "Tell us where you're travelling from and to, and see instantly whether you need a visa or a passport — then apply and track it in one place.",
       },
       { property: "og:title", content: "Passport & Visa Services — BUBOLI" },
       {
         property: "og:description",
         content:
-          "Compare passport services and per-country visa options, check required documents and fees, and add them straight to your trip basket.",
+          "Check visa requirements by country pair, compare passport services and fees, apply online and track your application.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -38,6 +49,25 @@ function PassportVisaPage() {
 }
 
 function Page() {
+  const { from, to } = Route.useSearch();
+  const fetchCatalog = useServerFn(getDocumentsCatalog);
+  const { data, isLoading } = useQuery({
+    queryKey: ["documents-catalog"],
+    queryFn: () => fetchCatalog(),
+  });
+
+  const services = data?.services ?? [];
+  const rules = data?.rules ?? [];
+
+  const origin = from && ORIGIN_COUNTRIES.includes(from) ? from : DEFAULT_ORIGIN;
+  const matches =
+    from && to
+      ? rules.filter(
+          (r) => r.origin_country === origin && r.destination_country.startsWith(to),
+        )
+      : [];
+  const visaFree = matches.length > 0 && matches.every((r) => r.requirement === "visa_free");
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-40 w-full border-b bg-background/80 py-2 backdrop-blur-xl">
@@ -47,6 +77,11 @@ function Page() {
             <span className="text-base font-semibold tracking-[0.14em]">BUBOLI</span>
           </Link>
           <div className="flex items-center gap-2">
+            <Link to="/track" className="hidden sm:block">
+              <Button variant="ghost" className="press rounded-full">
+                Track application
+              </Button>
+            </Link>
             <Link to="/" className="hidden sm:block">
               <Button variant="ghost" className="press rounded-full">
                 <ArrowLeft className="mr-2 h-4 w-4" /> Back to explore
@@ -66,13 +101,84 @@ function Page() {
             Passport & visa, sorted before you fly
           </h1>
           <p className="mt-3 text-base leading-relaxed text-muted-foreground">
-            Check what your destination needs, compare processing times and fees, and add the right
-            service to your trip basket — no surprises at the border.
+            Answer two questions and we'll tell you exactly what your trip needs, what it costs and
+            how long it takes.
           </p>
           <span className="mt-6 block h-px w-24 bg-gradient-to-r from-grape via-sunset to-transparent" />
         </Reveal>
 
-        <DocumentsLayer />
+        <RequirementWizard compact />
+
+        {from && to ? (
+          <section className="mt-12">
+            {isLoading ? (
+              <p className="text-sm text-muted-foreground">Checking the rules…</p>
+            ) : matches.length === 0 ? (
+              <div className="rounded-3xl border bg-card p-6">
+                <p className="font-medium">
+                  We don't have a saved rule for {from} → {to} yet.
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Browse the options below, or apply for a passport service in the meantime.
+                </p>
+              </div>
+            ) : (
+              <>
+                <div
+                  className={`rounded-3xl border p-6 ${
+                    visaFree ? "border-leaf/40 bg-leaf/5" : "border-sunset/40 bg-sunset/5"
+                  }`}
+                >
+                  <div className="flex items-start gap-3">
+                    {visaFree ? (
+                      <CheckCircle2 className="mt-0.5 h-6 w-6 shrink-0 text-leaf" />
+                    ) : (
+                      <AlertTriangle className="mt-0.5 h-6 w-6 shrink-0 text-sunset" />
+                    )}
+                    <div>
+                      <h2 className="text-xl font-semibold tracking-tight">
+                        {visaFree
+                          ? `Good news — you don't need a visa for ${to}`
+                          : `You'll need a visa for ${to}`}
+                      </h2>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        Travelling from {from}. {visaFree
+                          ? "Just make sure your passport is valid — most countries want at least six months left."
+                          : "Here are the options that apply to you, with fees and processing times."}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 grid gap-6 md:grid-cols-2">
+                    {matches.map((v) => (
+                      <VisaCard key={v.id} v={v} />
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-6 flex flex-col gap-3 rounded-3xl border bg-card p-6 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="flex items-start gap-3">
+                    <BookUser className="mt-0.5 h-5 w-5 shrink-0 text-lagoon" />
+                    <div>
+                      <p className="font-medium">No passport, or expiring within 6 months?</p>
+                      <p className="text-sm text-muted-foreground">
+                        Start a passport application — new, renewal or express.
+                      </p>
+                    </div>
+                  </div>
+                  <Link to="/documents/apply" search={{ kind: "passport" }}>
+                    <Button className="press rounded-full">Apply for a passport</Button>
+                  </Link>
+                </div>
+              </>
+            )}
+          </section>
+        ) : null}
+
+        <div className="mt-16">
+          <h2 className="mb-6 text-2xl font-semibold tracking-tight">Browse all services</h2>
+          <DocumentsLayer services={services} rules={rules} />
+        </div>
       </main>
 
       <footer className="border-t px-4 py-12 text-center text-sm text-muted-foreground md:px-8">

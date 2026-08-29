@@ -53,9 +53,15 @@ function Dashboard() {
             <h1 className="text-3xl font-semibold tracking-tight">Your trips</h1>
             <p className="mt-1 text-sm text-muted-foreground">Plan, organize, and reshape every journey.</p>
           </div>
-          <Link to="/trips/new">
-            <Button><Plus className="mr-2 h-4 w-4" /> New trip</Button>
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link to="/documents">
+              <Button variant="outline">My documents</Button>
+            </Link>
+            <Link to="/trips/new">
+              <Button><Plus className="mr-2 h-4 w-4" /> New trip</Button>
+            </Link>
+          </div>
+
         </div>
 
         {loading ? (
