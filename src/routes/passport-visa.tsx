@@ -201,6 +201,10 @@ function Page() {
         ) : null}
 
         <div className="mt-16">
+          <VisaTypesGrid rules={rules} />
+        </div>
+
+        <div className="mt-16">
           <h2 className="mb-6 text-2xl font-semibold tracking-tight">Browse all services</h2>
           <DocumentsLayer services={services} rules={rules} />
         </div>
