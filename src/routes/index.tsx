@@ -7,6 +7,7 @@ import { Logo } from "@/components/logo";
 import { Reveal } from "@/components/reveal";
 import { TripBasketProvider } from "@/lib/trip-basket";
 import { TripBasketSheet } from "@/components/travel/trip-basket-sheet";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { DestinationExplorer } from "@/components/travel/destination-explorer";
 import { FlightFeed, CarFeed, StayFeed } from "@/components/travel/category-feeds";
 import { TravelerFeed } from "@/components/travel/traveler-feed";
@@ -146,6 +147,7 @@ function Landing() {
                 Sign in
               </Button>
             </Link>
+            <ThemeToggle />
             <TripBasketSheet />
           </div>
         </div>

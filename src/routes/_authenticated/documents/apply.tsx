@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Logo } from "@/components/logo";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { getDocumentsCatalog, submitApplication } from "@/lib/documents.functions";
 import { formatMoney } from "@/lib/documents-ui";
 
@@ -106,11 +107,14 @@ function ApplyPage() {
             <Logo className="h-6 w-6" />
             <span className="text-base font-semibold tracking-[0.14em]">World Portal</span>
           </Link>
-          <Link to="/passport-visa">
-            <Button variant="ghost" className="press rounded-full">
-              <ArrowLeft className="mr-2 h-4 w-4" /> Back
-            </Button>
-          </Link>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <Link to="/passport-visa">
+              <Button variant="ghost" className="press rounded-full">
+                <ArrowLeft className="mr-2 h-4 w-4" /> Back
+              </Button>
+            </Link>
+          </div>
         </div>
       </header>
 

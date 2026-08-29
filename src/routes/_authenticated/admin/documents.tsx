@@ -12,6 +12,7 @@ import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Logo } from "@/components/logo";
+import { ThemeToggle } from "@/components/theme-toggle";
 import {
   adminListApplications,
   adminListRules,
@@ -45,11 +46,14 @@ function AdminDocuments() {
             <Logo className="h-6 w-6" />
             <span className="text-base font-semibold tracking-[0.14em]">World Portal admin</span>
           </Link>
-          <Link to="/dashboard">
-            <Button variant="ghost" className="press rounded-full">
-              <ArrowLeft className="mr-2 h-4 w-4" /> Dashboard
-            </Button>
-          </Link>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <Link to="/dashboard">
+              <Button variant="ghost" className="press rounded-full">
+                <ArrowLeft className="mr-2 h-4 w-4" /> Dashboard
+              </Button>
+            </Link>
+          </div>
         </div>
       </header>
 

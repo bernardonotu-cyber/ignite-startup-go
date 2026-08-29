@@ -5,6 +5,7 @@ import { ArrowLeft, Check, Circle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Logo } from "@/components/logo";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { getApplication } from "@/lib/documents.functions";
 import { STATUS_FLOW, STATUS_LABEL, formatMoney } from "@/lib/documents-ui";
 
@@ -32,11 +33,14 @@ function TrackApplication() {
             <Logo className="h-6 w-6" />
             <span className="text-base font-semibold tracking-[0.14em]">World Portal</span>
           </Link>
-          <Link to="/documents">
-            <Button variant="ghost" className="press rounded-full">
-              <ArrowLeft className="mr-2 h-4 w-4" /> My documents
-            </Button>
-          </Link>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <Link to="/documents">
+              <Button variant="ghost" className="press rounded-full">
+                <ArrowLeft className="mr-2 h-4 w-4" /> My documents
+              </Button>
+            </Link>
+          </div>
         </div>
       </header>
 
