@@ -5,7 +5,6 @@ import { ArrowLeft, CheckCircle2, AlertTriangle, BookUser } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/logo";
 import { Reveal } from "@/components/reveal";
-import { TripBasketProvider } from "@/lib/trip-basket";
 import { TripBasketSheet } from "@/components/travel/trip-basket-sheet";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { DocumentsLayer, VisaCard } from "@/components/travel/documents-layer";
@@ -50,9 +49,7 @@ export const Route = createFileRoute("/passport-visa")({
 
 function PassportVisaPage() {
   return (
-    <TripBasketProvider>
       <Page />
-    </TripBasketProvider>
   );
 }
 
