@@ -127,6 +127,16 @@ function Landing() {
             ))}
           </nav>
           <div className="flex items-center gap-2">
+            <Link to="/hire" className="hidden sm:block">
+              <Button
+                variant="ghost"
+                className={`press rounded-full transition-colors duration-500 ${
+                  scrolled ? "" : "bg-black/30 text-white backdrop-blur hover:bg-white/20 hover:text-white"
+                }`}
+              >
+                Hire a Pro
+              </Button>
+            </Link>
             <Link to="/passport-visa" className="hidden sm:block">
               <Button
                 variant="ghost"

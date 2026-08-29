@@ -99,6 +99,11 @@ function Page() {
             <span className="text-base font-semibold tracking-[0.14em]">World Portal</span>
           </Link>
           <div className="flex items-center gap-2">
+            <Link to="/hire" className="hidden sm:block">
+              <Button variant="ghost" className="press rounded-full">
+                Hire a Pro
+              </Button>
+            </Link>
             <Link to="/track" className="hidden sm:block">
               <Button variant="ghost" className="press rounded-full">
                 Track application
