@@ -347,7 +347,7 @@ function Landing() {
             Turn your basket into a real itinerary
           </h2>
           <p className="mx-auto mt-5 max-w-xl leading-relaxed text-white/85">
-            When your trip feels right, World Portal's AI turns everything you picked into a day-by-day plan
+            When your trip feels right, Vivid AI turns everything you picked into a day-by-day plan
             with timings, costs and local tips.
           </p>
           <div className="mt-9 flex flex-wrap justify-center gap-3">
