@@ -13,6 +13,7 @@ import { Route as TrackRouteImport } from './routes/track'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as PassportVisaRouteImport } from './routes/passport-visa'
 import { Route as HireRouteImport } from './routes/hire'
+import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
@@ -42,6 +43,11 @@ const PassportVisaRoute = PassportVisaRouteImport.update({
 const HireRoute = HireRouteImport.update({
   id: '/hire',
   path: '/hire',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExploreRoute = ExploreRouteImport.update({
+  id: '/explore',
+  path: '/explore',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -102,6 +108,7 @@ const AuthenticatedAdminDocumentsRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/explore': typeof ExploreRoute
   '/hire': typeof HireRoute
   '/passport-visa': typeof PassportVisaRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -117,6 +124,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/explore': typeof ExploreRoute
   '/hire': typeof HireRoute
   '/passport-visa': typeof PassportVisaRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -134,6 +142,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/explore': typeof ExploreRoute
   '/hire': typeof HireRoute
   '/passport-visa': typeof PassportVisaRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -151,6 +160,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/explore'
     | '/hire'
     | '/passport-visa'
     | '/reset-password'
@@ -166,6 +176,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/explore'
     | '/hire'
     | '/passport-visa'
     | '/reset-password'
@@ -182,6 +193,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/explore'
     | '/hire'
     | '/passport-visa'
     | '/reset-password'
@@ -199,6 +211,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  ExploreRoute: typeof ExploreRoute
   HireRoute: typeof HireRoute
   PassportVisaRoute: typeof PassportVisaRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
@@ -233,6 +246,13 @@ declare module '@tanstack/react-router' {
       path: '/hire'
       fullPath: '/hire'
       preLoaderRoute: typeof HireRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/explore': {
+      id: '/explore'
+      path: '/explore'
+      fullPath: '/explore'
+      preLoaderRoute: typeof ExploreRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -335,6 +355,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  ExploreRoute: ExploreRoute,
   HireRoute: HireRoute,
   PassportVisaRoute: PassportVisaRoute,
   ResetPasswordRoute: ResetPasswordRoute,

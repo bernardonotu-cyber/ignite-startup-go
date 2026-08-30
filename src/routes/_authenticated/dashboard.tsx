@@ -27,8 +27,8 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 const QUICK_ACTIONS = [
   {
     icon: Sparkles,
-    title: "Plan a trip with AI",
-    body: "Tell us the vibe — get a full day-by-day itinerary in seconds.",
+    title: "Plan a trip with Vivid AI",
+    body: "Tell us the vibe — Vivid AI builds a full day-by-day itinerary in seconds.",
     to: "/trips/new",
     tint: "bg-grape/15 text-grape",
   },
@@ -57,7 +57,7 @@ const QUICK_ACTIONS = [
     icon: Compass,
     title: "Explore destinations",
     body: "Browse places, flights, cars and stays — build your basket.",
-    to: "/",
+    to: "/explore",
     tint: "bg-mango/20 text-mango",
   },
 ] as const;
@@ -89,7 +89,7 @@ function Dashboard() {
             <span className="font-semibold">World Portal</span>
           </Link>
           <nav className="hidden items-center gap-1 text-sm md:flex">
-            <Link to="/">
+            <Link to="/explore">
               <Button variant="ghost" className="press rounded-full">Explore</Button>
             </Link>
             <Link to="/passport-visa">
@@ -161,7 +161,7 @@ function Dashboard() {
             <Logo className="h-10 w-10 opacity-50" />
             <h3 className="mt-4 text-lg font-semibold">No trips yet</h3>
             <p className="mt-1 max-w-sm text-sm text-muted-foreground">
-              Create your first trip and let AI build a full itinerary in seconds.
+              Create your first trip and let Vivid AI build a full itinerary in seconds.
             </p>
             <Link to="/trips/new" className="mt-6">
               <Button><Plus className="mr-2 h-4 w-4" /> Plan your first trip</Button>
