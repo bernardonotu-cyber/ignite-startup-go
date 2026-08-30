@@ -1,12 +1,17 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Plus, MapPin, Calendar, LogOut } from "lucide-react";
+import { TripBasketSheet } from "@/components/travel/trip-basket-sheet";
+import { Reveal } from "@/components/reveal";
+import {
+  Plus, MapPin, Calendar, LogOut, Compass, BookUser, Briefcase, Radar, Sparkles, ArrowRight,
+} from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
@@ -19,8 +24,47 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
   component: Dashboard,
 });
 
+const QUICK_ACTIONS = [
+  {
+    icon: Sparkles,
+    title: "Plan a trip with AI",
+    body: "Tell us the vibe — get a full day-by-day itinerary in seconds.",
+    to: "/trips/new",
+    tint: "bg-grape/15 text-grape",
+  },
+  {
+    icon: BookUser,
+    title: "Passport & visa",
+    body: "Check what your trip needs, apply, and track the paperwork.",
+    to: "/passport-visa",
+    tint: "bg-sunset/15 text-sunset",
+  },
+  {
+    icon: Briefcase,
+    title: "Hire a pro",
+    body: "Photographers, chefs, interpreters, security — by city.",
+    to: "/hire",
+    tint: "bg-lagoon/15 text-lagoon",
+  },
+  {
+    icon: Radar,
+    title: "Track application",
+    body: "See exactly where your passport or visa application is.",
+    to: "/track",
+    tint: "bg-leaf/15 text-leaf",
+  },
+  {
+    icon: Compass,
+    title: "Explore destinations",
+    body: "Browse places, flights, cars and stays — build your basket.",
+    to: "/",
+    tint: "bg-mango/20 text-mango",
+  },
+] as const;
+
 function Dashboard() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [trips, setTrips] = useState<Tables<"trips">[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -30,20 +74,37 @@ function Dashboard() {
   }, []);
 
   const signOut = async () => {
+    await queryClient.cancelQueries();
+    queryClient.clear();
     await supabase.auth.signOut();
     navigate({ to: "/auth", replace: true });
   };
 
   return (
     <div className="min-h-screen bg-muted/20">
-      <header className="border-b bg-background">
+      <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <Link to="/" className="flex items-center gap-2">
             <Logo className="h-6 w-6" />
             <span className="font-semibold">World Portal</span>
           </Link>
+          <nav className="hidden items-center gap-1 text-sm md:flex">
+            <Link to="/">
+              <Button variant="ghost" className="press rounded-full">Explore</Button>
+            </Link>
+            <Link to="/passport-visa">
+              <Button variant="ghost" className="press rounded-full">Passport & Visa</Button>
+            </Link>
+            <Link to="/hire">
+              <Button variant="ghost" className="press rounded-full">Hire a Pro</Button>
+            </Link>
+            <Link to="/track">
+              <Button variant="ghost" className="press rounded-full">Track</Button>
+            </Link>
+          </nav>
           <div className="flex items-center gap-2">
             <ThemeToggle />
+            <TripBasketSheet />
             <Button variant="ghost" size="sm" onClick={signOut}>
               <LogOut className="mr-2 h-4 w-4" /> Sign out
             </Button>
@@ -52,9 +113,35 @@ function Dashboard() {
       </header>
 
       <main className="mx-auto max-w-6xl px-6 py-10">
-        <div className="mb-8 flex items-end justify-between">
+        <div className="mb-8">
+          <h1 className="text-3xl font-semibold tracking-tight">Your travel hub</h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Everything World Portal does, one tap away.
+          </p>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {QUICK_ACTIONS.map(({ icon: Icon, title, body, to, tint }, i) => (
+            <Reveal key={title} delay={i * 60}>
+              <Link to={to as any}>
+                <Card className="press group h-full p-5 transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+                  <span className={`inline-flex rounded-xl p-2.5 transition duration-300 group-hover:scale-110 ${tint}`}>
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <p className="mt-3 font-semibold tracking-tight">{title}</p>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{body}</p>
+                  <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100">
+                    Open <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
+                </Card>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+
+        <div className="mb-6 mt-12 flex items-end justify-between">
           <div>
-            <h1 className="text-3xl font-semibold tracking-tight">Your trips</h1>
+            <h2 className="text-2xl font-semibold tracking-tight">Your trips</h2>
             <p className="mt-1 text-sm text-muted-foreground">Plan, organize, and reshape every journey.</p>
           </div>
           <div className="flex items-center gap-2">
@@ -65,7 +152,6 @@ function Dashboard() {
               <Button><Plus className="mr-2 h-4 w-4" /> New trip</Button>
             </Link>
           </div>
-
         </div>
 
         {loading ? (
