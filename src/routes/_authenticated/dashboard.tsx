@@ -64,8 +64,6 @@ const QUICK_ACTIONS = [
 ] as const;
 
 function Dashboard() {
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const [trips, setTrips] = useState<Tables<"trips">[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -74,12 +72,6 @@ function Dashboard() {
       .then(({ data }) => { setTrips(data ?? []); setLoading(false); });
   }, []);
 
-  const signOut = async () => {
-    await queryClient.cancelQueries();
-    queryClient.clear();
-    await supabase.auth.signOut();
-    navigate({ to: "/auth", replace: true });
-  };
 
   return (
     <div className="min-h-screen bg-muted/20">
