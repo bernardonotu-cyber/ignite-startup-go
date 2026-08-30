@@ -1,22 +1,23 @@
-# Let anyone reach the passport / visa application form
+# Make sign-in work reliably
 
-Right now the application form lives behind the login gate (`/documents/apply` sits under the protected area), so visitors who aren't signed in get bounced to `/auth` and never see the page where details and documents are entered. Only one account exists in the backend, and new sign-ups need an email confirmation before a session exists — so a new user who "creates an account" is still logged out and lands back on the sign-in screen. That's the loop you're hitting.
+The application page stays behind sign-in — that's fine. The problem is the sign-in itself: creating an account currently requires an email confirmation before a session exists, so after "Account created" the app sends you to the dashboard, the auth gate finds no session, and bounces you back to the sign-in screen. Failed sign-ins also give no visible reason.
 
 ## What changes
 
-1. **The application page becomes public.** Move the apply screen to `/apply` (no login required). It keeps the same three steps: choose service, enter your details, confirm the price. Old `/documents/apply` links redirect there, so the buttons on the Passport & Visa page keep working.
-2. **Guests can submit.** Submitting without an account creates the application against your email and returns the reference code. Signed-in users still get the application attached to their account so it shows in their dashboard.
-3. **Guest tracking.** After submitting, the confirmation/tracking screen is reachable with the reference code plus the email used, without signing in. Signed-in owners and admins keep full access as today.
-4. **Sign-up actually signs you in.** Turn on instant account confirmation so creating an account gives a working session immediately, and show a clear message instead of a silent redirect when it doesn't.
-5. **Clear sign-in messaging.** Wrong password / unconfirmed email now surfaces a readable error instead of appearing to do nothing.
+1. **Sign-up signs you in immediately.** Turn on instant account confirmation in the backend so a new account has a working session right away, instead of waiting on a confirmation email.
+2. **No more bounce loop.** After sign-in or sign-up, wait until the session is actually established before navigating, and send the user to where they were trying to go (e.g. the passport/visa application page) instead of always the dashboard.
+3. **Clear errors.** Show the real reason a sign-in fails (wrong password, email not confirmed, rate limited) in the form, plus a "Forgot password?" link and a reset-password page so a locked-out account can recover.
+4. **Header reflects being signed in.** Show an account/sign-out control once signed in, so it's obvious the login worked.
+5. **Google sign-in enabled.** Configure the Google provider so the "Continue with Google" button actually works instead of erroring.
 
 ## Technical notes
 
-- New public route `src/routes/apply.tsx` with the current form; `src/routes/_authenticated/documents/apply.tsx` becomes a redirect stub. Same for a public `src/routes/documents/$reference.tsx`-style status view guarded by reference + email match.
-- `submitApplication` drops `requireSupabaseAuth` and instead reads the optional bearer session: `user_id` set when present, `null` for guests. Requires a migration making `document_applications.user_id` nullable, plus RLS/GRANT updates: `anon` INSERT allowed with no policy-readable SELECT; guest reads go through a server function using the service-role client after verifying `reference` + `email`, never through direct anon SELECT.
-- `getApplication` split into `getMyApplication` (auth, unchanged) and `getApplicationByReference` (public, requires matching email).
-- Auth: enable auto-confirm email sign-ups so `signUp()` returns a session; surface `error.message` in the auth form.
+- `supabase--configure_auth` with `auto_confirm_email: true`; `supabase--configure_social_auth` for Google.
+- `src/routes/auth.tsx`: add a `redirect` search param, await `getUser()` after the auth call before navigating, surface `error.message` inline, add forgot-password via `resetPasswordForEmail` with `redirectTo: origin + "/reset-password"`.
+- New public `src/routes/reset-password.tsx` handling the recovery link and calling `updateUser({ password })`.
+- `src/routes/_authenticated/route.tsx`: pass the blocked path as `redirect` on the redirect to `/auth` (gate itself unchanged otherwise).
+- Root `onAuthStateChange` subscriber invalidates the router on sign-in/sign-out; header shows sign-out with proper cache teardown.
 
 ## Not changing
 
-Admin console, pricing/catalog data, visa rules, and the rest of the site stay as they are.
+The apply/tracking pages stay behind login, and the form, pricing, visa rules and admin console are untouched.
