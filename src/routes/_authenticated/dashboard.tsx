@@ -1,6 +1,5 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -9,8 +8,9 @@ import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { TripBasketSheet } from "@/components/travel/trip-basket-sheet";
 import { Reveal } from "@/components/reveal";
+import { AccountMenu } from "@/components/account-menu";
 import {
-  Plus, MapPin, Calendar, LogOut, Compass, BookUser, Briefcase, Radar, Sparkles, ArrowRight,
+  Plus, MapPin, Calendar, Compass, BookUser, Briefcase, Radar, Sparkles, ArrowRight,
 } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 
@@ -63,8 +63,6 @@ const QUICK_ACTIONS = [
 ] as const;
 
 function Dashboard() {
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const [trips, setTrips] = useState<Tables<"trips">[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -73,12 +71,6 @@ function Dashboard() {
       .then(({ data }) => { setTrips(data ?? []); setLoading(false); });
   }, []);
 
-  const signOut = async () => {
-    await queryClient.cancelQueries();
-    queryClient.clear();
-    await supabase.auth.signOut();
-    navigate({ to: "/auth", replace: true });
-  };
 
   return (
     <div className="min-h-screen bg-muted/20">
@@ -105,9 +97,7 @@ function Dashboard() {
           <div className="flex items-center gap-2">
             <ThemeToggle />
             <TripBasketSheet />
-            <Button variant="ghost" size="sm" onClick={signOut}>
-              <LogOut className="mr-2 h-4 w-4" /> Sign out
-            </Button>
+            <AccountMenu />
           </div>
         </div>
       </header>
