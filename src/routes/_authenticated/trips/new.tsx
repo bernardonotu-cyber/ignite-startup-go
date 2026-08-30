@@ -40,6 +40,7 @@ function NewTrip() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    let tripId: string | null = null;
     try {
       const { data: user } = await supabase.auth.getUser();
       if (!user.user) throw new Error("Not signed in");
@@ -47,14 +48,22 @@ function NewTrip() {
         ...form,
         user_id: user.user.id,
       }).select().single();
-      if (error || !trip) throw error;
+      if (error || !trip) throw new Error(error?.message ?? "Could not create the trip");
+      tripId = trip.id;
 
-      toast.info("Generating your itinerary…");
+      toast.info("Vivid AI is building your itinerary…");
       await genFn({ data: { tripId: trip.id } });
       toast.success("Itinerary ready!");
       navigate({ to: "/trips/$tripId", params: { tripId: trip.id } });
     } catch (err: any) {
-      toast.error(err.message ?? "Failed to create trip");
+      const message = err?.message ?? "Failed to create trip";
+      if (tripId) {
+        // The trip exists — take the user there so they can retry generation.
+        toast.error(`${message} — trip saved, you can retry generating there.`);
+        navigate({ to: "/trips/$tripId", params: { tripId } });
+        return;
+      }
+      toast.error(message);
       setLoading(false);
     }
   };
