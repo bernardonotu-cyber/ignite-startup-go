@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import { ArrowLeft, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/trips/new")({
-  head: () => ({ meta: [{ title: "New Trip — World Portal" }] }),
+  head: () => ({ meta: [{ title: "Plan a Trip with Vivid AI — World Portal" }] }),
   component: NewTrip,
 });
 
@@ -77,7 +77,7 @@ function NewTrip() {
         <Card className="p-8">
           <div className="mb-6">
             <h1 className="text-2xl font-semibold tracking-tight">Plan a new trip</h1>
-            <p className="mt-1 text-sm text-muted-foreground">Tell us the basics — AI does the rest.</p>
+            <p className="mt-1 text-sm text-muted-foreground">Tell us the basics — Vivid AI does the rest.</p>
           </div>
           <form onSubmit={submit} className="space-y-5">
             <div>
@@ -138,7 +138,7 @@ function NewTrip() {
               </div>
             </div>
             <Button type="submit" className="w-full" size="lg" disabled={loading}>
-              {loading ? "Building your itinerary…" : (<><Sparkles className="mr-2 h-4 w-4" /> Generate itinerary</>)}
+              {loading ? "Vivid AI is building your itinerary…" : (<><Sparkles className="mr-2 h-4 w-4" /> Generate itinerary</>)}
             </Button>
           </form>
         </Card>
