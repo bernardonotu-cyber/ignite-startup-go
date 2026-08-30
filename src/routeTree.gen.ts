@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrackRouteImport } from './routes/track'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as PassportVisaRouteImport } from './routes/passport-visa'
 import { Route as HireRouteImport } from './routes/hire'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -26,6 +27,11 @@ import { Route as AuthenticatedAdminDocumentsRouteImport } from './routes/_authe
 const TrackRoute = TrackRouteImport.update({
   id: '/track',
   path: '/track',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PassportVisaRoute = PassportVisaRouteImport.update({
@@ -98,6 +104,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/hire': typeof HireRoute
   '/passport-visa': typeof PassportVisaRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/track': typeof TrackRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/admin/documents': typeof AuthenticatedAdminDocumentsRoute
@@ -112,6 +119,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/hire': typeof HireRoute
   '/passport-visa': typeof PassportVisaRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/track': typeof TrackRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/admin/documents': typeof AuthenticatedAdminDocumentsRoute
@@ -128,6 +136,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/hire': typeof HireRoute
   '/passport-visa': typeof PassportVisaRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/track': typeof TrackRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/admin/documents': typeof AuthenticatedAdminDocumentsRoute
@@ -144,6 +153,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/hire'
     | '/passport-visa'
+    | '/reset-password'
     | '/track'
     | '/dashboard'
     | '/admin/documents'
@@ -158,6 +168,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/hire'
     | '/passport-visa'
+    | '/reset-password'
     | '/track'
     | '/dashboard'
     | '/admin/documents'
@@ -173,6 +184,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/hire'
     | '/passport-visa'
+    | '/reset-password'
     | '/track'
     | '/_authenticated/dashboard'
     | '/_authenticated/admin/documents'
@@ -189,6 +201,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   HireRoute: typeof HireRoute
   PassportVisaRoute: typeof PassportVisaRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   TrackRoute: typeof TrackRoute
 }
 
@@ -199,6 +212,13 @@ declare module '@tanstack/react-router' {
       path: '/track'
       fullPath: '/track'
       preLoaderRoute: typeof TrackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/passport-visa': {
@@ -317,6 +337,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   HireRoute: HireRoute,
   PassportVisaRoute: PassportVisaRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   TrackRoute: TrackRoute,
 }
 export const routeTree = rootRouteImport
