@@ -9,8 +9,9 @@ import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { TripBasketSheet } from "@/components/travel/trip-basket-sheet";
 import { Reveal } from "@/components/reveal";
+import { AccountMenu } from "@/components/account-menu";
 import {
-  Plus, MapPin, Calendar, LogOut, Compass, BookUser, Briefcase, Radar, Sparkles, ArrowRight,
+  Plus, MapPin, Calendar, Compass, BookUser, Briefcase, Radar, Sparkles, ArrowRight,
 } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 
@@ -105,9 +106,7 @@ function Dashboard() {
           <div className="flex items-center gap-2">
             <ThemeToggle />
             <TripBasketSheet />
-            <Button variant="ghost" size="sm" onClick={signOut}>
-              <LogOut className="mr-2 h-4 w-4" /> Sign out
-            </Button>
+            <AccountMenu />
           </div>
         </div>
       </header>

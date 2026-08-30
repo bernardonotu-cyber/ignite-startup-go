@@ -17,6 +17,7 @@ import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedDocumentsIndexRouteImport } from './routes/_authenticated/documents/index'
 import { Route as AuthenticatedTripsNewRouteImport } from './routes/_authenticated/trips/new'
@@ -63,6 +64,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
@@ -114,6 +120,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/track': typeof TrackRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/admin/documents': typeof AuthenticatedAdminDocumentsRoute
   '/documents/$reference': typeof AuthenticatedDocumentsReferenceRoute
   '/documents/apply': typeof AuthenticatedDocumentsApplyRoute
@@ -130,6 +137,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/track': typeof TrackRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/admin/documents': typeof AuthenticatedAdminDocumentsRoute
   '/documents/$reference': typeof AuthenticatedDocumentsReferenceRoute
   '/documents/apply': typeof AuthenticatedDocumentsApplyRoute
@@ -148,6 +156,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/track': typeof TrackRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/admin/documents': typeof AuthenticatedAdminDocumentsRoute
   '/_authenticated/documents/$reference': typeof AuthenticatedDocumentsReferenceRoute
   '/_authenticated/documents/apply': typeof AuthenticatedDocumentsApplyRoute
@@ -166,6 +175,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/track'
     | '/dashboard'
+    | '/profile'
     | '/admin/documents'
     | '/documents/$reference'
     | '/documents/apply'
@@ -182,6 +192,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/track'
     | '/dashboard'
+    | '/profile'
     | '/admin/documents'
     | '/documents/$reference'
     | '/documents/apply'
@@ -199,6 +210,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/track'
     | '/_authenticated/dashboard'
+    | '/_authenticated/profile'
     | '/_authenticated/admin/documents'
     | '/_authenticated/documents/$reference'
     | '/_authenticated/documents/apply'
@@ -276,6 +288,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -330,6 +349,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedAdminDocumentsRoute: typeof AuthenticatedAdminDocumentsRoute
   AuthenticatedDocumentsReferenceRoute: typeof AuthenticatedDocumentsReferenceRoute
   AuthenticatedDocumentsApplyRoute: typeof AuthenticatedDocumentsApplyRoute
@@ -340,6 +360,7 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedAdminDocumentsRoute: AuthenticatedAdminDocumentsRoute,
   AuthenticatedDocumentsReferenceRoute: AuthenticatedDocumentsReferenceRoute,
   AuthenticatedDocumentsApplyRoute: AuthenticatedDocumentsApplyRoute,
