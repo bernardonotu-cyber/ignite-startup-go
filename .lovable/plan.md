@@ -9,6 +9,10 @@ The application page stays behind sign-in — that's fine. The problem is the si
 3. **Clear errors.** Show the real reason a sign-in fails (wrong password, email not confirmed, rate limited) in the form, plus a "Forgot password?" link and a reset-password page so a locked-out account can recover.
 4. **Header reflects being signed in.** Show an account/sign-out control once signed in, so it's obvious the login worked.
 5. **Google sign-in enabled.** Configure the Google provider so the "Continue with Google" button actually works instead of erroring.
+6. **The signed-in home becomes a real hub.** The dashboard currently shows only "My documents" and "Your trips" — nothing else is reachable without going back to the landing page. Rework it into a control center:
+   - Top nav with links to every area: Explore (home), Passport & Visa, Hire a Pro, Track application, plus the theme toggle, trip basket, and sign-out.
+   - Quick-access cards on the dashboard itself for each feature — plan a trip (AI), check travel documents, hire a professional, track an application — so nothing requires leaving the signed-in area to discover features.
+   - Keeps the existing trips grid and documents list below the quick actions.
 
 ## Technical notes
 
