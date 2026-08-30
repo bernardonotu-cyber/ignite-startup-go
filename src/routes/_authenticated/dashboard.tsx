@@ -27,8 +27,8 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 const QUICK_ACTIONS = [
   {
     icon: Sparkles,
-    title: "Plan a trip with AI",
-    body: "Tell us the vibe — get a full day-by-day itinerary in seconds.",
+    title: "Plan a trip with Vivid AI",
+    body: "Tell us the vibe — Vivid AI builds a full day-by-day itinerary in seconds.",
     to: "/trips/new",
     tint: "bg-grape/15 text-grape",
   },
