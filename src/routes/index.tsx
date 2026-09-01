@@ -20,13 +20,13 @@ import { Sparkles, Plane, Car, Hotel, MapPin, Search, Compass, Ticket, ArrowRigh
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "World Portal — Explore, Shop and Build Your Whole Trip" },
+      { title: "E-Embassy — Explore, Shop and Build Your Whole Trip" },
       {
         name: "description",
         content:
           "Explore destinations with real history and photos, then add flights, car rentals and hotels to your trip basket — and build your journey piece by piece.",
       },
-      { property: "og:title", content: "World Portal — Explore, Shop and Build Your Whole Trip" },
+      { property: "og:title", content: "E-Embassy — Explore, Shop and Build Your Whole Trip" },
       {
         property: "og:description",
         content: "A social way to explore places, compare flights, cars and stays, and build your trip like a shopping basket.",
@@ -96,8 +96,7 @@ function Landing() {
               scrolled ? "text-foreground" : "bg-black/30 text-white backdrop-blur"
             }`}
           >
-            <Logo className="h-6 w-6" />
-            <span className="text-base font-semibold tracking-[0.14em]">World Portal</span>
+            <Logo className="h-7" />
           </div>
           <nav
             className={`hidden items-center gap-1 rounded-full px-2 py-1.5 text-sm transition-colors duration-500 md:flex ${
@@ -366,7 +365,7 @@ function Landing() {
       </section>
 
       <footer className="border-t px-4 py-12 text-center text-sm text-muted-foreground md:px-8">
-        © {new Date().getFullYear()} World Portal. Built for travelers who like being in control.
+        © {new Date().getFullYear()} E-Embassy. Built for travelers who like being in control.
       </footer>
     </div>
   );

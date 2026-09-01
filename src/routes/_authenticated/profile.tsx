@@ -16,10 +16,10 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/_authenticated/profile")({
   head: () => ({
     meta: [
-      { title: "Your Profile — World Portal" },
-      { name: "description", content: "Manage your World Portal account details, name and avatar." },
-      { property: "og:title", content: "Your Profile — World Portal" },
-      { property: "og:description", content: "Manage your World Portal account details." },
+      { title: "Your Profile — E-Embassy" },
+      { name: "description", content: "Manage your E-Embassy account details, name and avatar." },
+      { property: "og:title", content: "Your Profile — E-Embassy" },
+      { property: "og:description", content: "Manage your E-Embassy account details." },
       { property: "og:type", content: "profile" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -74,8 +74,7 @@ function ProfilePage() {
       <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
           <Link to="/dashboard" className="flex items-center gap-2">
-            <Logo className="h-6 w-6" />
-            <span className="font-semibold">World Portal</span>
+            <Logo className="h-7" />
           </Link>
           <div className="flex items-center gap-2">
             <ThemeToggle />
@@ -90,7 +89,7 @@ function ProfilePage() {
           <ArrowLeft className="h-4 w-4" /> Back to dashboard
         </Link>
         <h1 className="text-3xl font-semibold tracking-tight">Your profile</h1>
-        <p className="mt-1 text-sm text-muted-foreground">Your account details across World Portal.</p>
+        <p className="mt-1 text-sm text-muted-foreground">Your account details across E-Embassy.</p>
 
         <Card className="mt-6 max-w-xl p-6">
           {loading ? (

@@ -12,9 +12,9 @@ import { ArrowLeft } from "lucide-react";
 export const Route = createFileRoute("/explore")({
   head: () => ({
     meta: [
-      { title: "Explore Destinations — World Portal" },
+      { title: "Explore Destinations — E-Embassy" },
       { name: "description", content: "Browse destinations, places to visit, flights, cars and stays — and build your trip basket piece by piece." },
-      { property: "og:title", content: "Explore Destinations — World Portal" },
+      { property: "og:title", content: "Explore Destinations — E-Embassy" },
       { property: "og:description", content: "Browse destinations, places to visit, flights, cars and stays — and build your trip basket piece by piece." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -42,8 +42,7 @@ function ExplorePage() {
       <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <Link to="/dashboard" className="flex items-center gap-2">
-            <Logo className="h-6 w-6" />
-            <span className="font-semibold">World Portal</span>
+            <Logo className="h-7" />
           </Link>
           <nav className="hidden items-center gap-1 text-sm md:flex">
             <Link to="/dashboard"><Button variant="ghost" className="press rounded-full">Hub</Button></Link>

@@ -11,8 +11,8 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/reset-password")({
   head: () => ({
     meta: [
-      { title: "Set a new password — World Portal" },
-      { name: "description", content: "Choose a new password for your World Portal account." },
+      { title: "Set a new password — E-Embassy" },
+      { name: "description", content: "Choose a new password for your E-Embassy account." },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -71,8 +71,7 @@ function ResetPasswordPage() {
     <div className="flex min-h-screen items-center justify-center bg-muted/30 px-4 py-12">
       <div className="w-full max-w-md">
         <Link to="/" className="mb-8 flex items-center justify-center gap-2 text-foreground">
-          <Logo className="h-7 w-7" />
-          <span className="text-lg font-semibold">World Portal</span>
+          <Logo className="h-8" />
         </Link>
         <Card className="p-8">
           <h1 className="text-2xl font-semibold tracking-tight">Set a new password</h1>

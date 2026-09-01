@@ -82,14 +82,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "World Portal — Plan Your Whole Trip" },
+      { title: "E-Embassy — Plan Your Whole Trip" },
       { name: "description", content: "Plan your entire trip in one place with AI-powered itineraries." },
-      { name: "author", content: "World Portal" },
-      { property: "og:title", content: "World Portal — Plan Your Whole Trip" },
+      { name: "author", content: "E-Embassy" },
+      { property: "og:title", content: "E-Embassy — Plan Your Whole Trip" },
       { property: "og:description", content: "Plan your entire trip in one place with AI-powered itineraries." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@buboli" },
+      { name: "twitter:site", content: "@eembassy" },
     ],
     links: [
       {

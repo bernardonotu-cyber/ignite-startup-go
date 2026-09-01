@@ -8,13 +8,13 @@ import { ThemeToggle } from "@/components/theme-toggle";
 export const Route = createFileRoute("/track")({
   head: () => ({
     meta: [
-      { title: "Track Your Passport or Visa Application — World Portal" },
+      { title: "Track Your Passport or Visa Application — E-Embassy" },
       {
         name: "description",
         content:
-          "Enter your World Portal reference code to see exactly where your passport or visa application is, from submission to delivery.",
+          "Enter your E-Embassy reference code to see exactly where your passport or visa application is, from submission to delivery.",
       },
-      { property: "og:title", content: "Track Your Passport or Visa Application — World Portal" },
+      { property: "og:title", content: "Track Your Passport or Visa Application — E-Embassy" },
       {
         property: "og:description",
         content: "Live status updates for your travel document application, step by step.",
@@ -35,8 +35,7 @@ function TrackLookup() {
       <header className="border-b py-3">
         <div className="mx-auto flex max-w-3xl items-center justify-between px-4">
           <Link to="/" className="press flex items-center gap-2">
-            <Logo className="h-6 w-6" />
-            <span className="text-base font-semibold tracking-[0.14em]">World Portal</span>
+            <Logo className="h-7" />
           </Link>
           <div className="flex items-center gap-2">
             <ThemeToggle />

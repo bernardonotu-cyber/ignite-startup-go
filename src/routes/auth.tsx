@@ -20,10 +20,10 @@ export const Route = createFileRoute("/auth")({
   }),
   head: () => ({
     meta: [
-      { title: "Sign in — World Portal" },
-      { name: "description", content: "Sign in to World Portal to plan and manage your trips." },
-      { property: "og:title", content: "Sign in — World Portal" },
-      { property: "og:description", content: "Sign in to World Portal." },
+      { title: "Sign in — E-Embassy" },
+      { name: "description", content: "Sign in to E-Embassy to plan and manage your trips." },
+      { property: "og:title", content: "Sign in — E-Embassy" },
+      { property: "og:description", content: "Sign in to E-Embassy." },
     ],
   }),
   component: AuthPage,
@@ -127,8 +127,7 @@ function AuthPage() {
     <div className="flex min-h-screen items-center justify-center bg-muted/30 px-4 py-12">
       <div className="w-full max-w-md">
         <Link to="/" className="mb-8 flex items-center justify-center gap-2 text-foreground">
-          <Logo className="h-7 w-7" />
-          <span className="text-lg font-semibold">World Portal</span>
+          <Logo className="h-8" />
         </Link>
         <Card className="p-8">
           <h1 className="text-2xl font-semibold tracking-tight">

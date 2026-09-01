@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import { ArrowLeft, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/trips/new")({
-  head: () => ({ meta: [{ title: "Plan a Trip with Vivid AI — World Portal" }] }),
+  head: () => ({ meta: [{ title: "Plan a Trip with Vivid AI — E-Embassy" }] }),
   component: NewTrip,
 });
 

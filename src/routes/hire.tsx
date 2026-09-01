@@ -10,13 +10,13 @@ import { HireExplorer } from "@/components/travel/hire-explorer";
 export const Route = createFileRoute("/hire")({
   head: () => ({
     meta: [
-      { title: "Hire a Pro — Freelancers for Your Trip | World Portal" },
+      { title: "Hire a Pro — Freelancers for Your Trip | E-Embassy" },
       {
         name: "description",
         content:
           "Hire vetted photographers, videographers, private chefs, barbers, personal shoppers, interpreters, security, babysitters and event planners in your destination.",
       },
-      { property: "og:title", content: "Hire a Pro — Freelancers for Your Trip | World Portal" },
+      { property: "og:title", content: "Hire a Pro — Freelancers for Your Trip | E-Embassy" },
       {
         property: "og:description",
         content:
@@ -35,8 +35,7 @@ function HirePage() {
         <header className="sticky top-0 z-40 w-full border-b bg-background/80 py-2 backdrop-blur-xl">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-4 md:px-8">
             <Link to="/" className="press flex items-center gap-2 rounded-full px-4 py-2">
-              <Logo className="h-6 w-6" />
-              <span className="text-base font-semibold tracking-[0.14em]">World Portal</span>
+              <Logo className="h-7" />
             </Link>
             <div className="flex items-center gap-2">
               <Link to="/passport-visa" className="hidden sm:block">
@@ -75,7 +74,7 @@ function HirePage() {
         </main>
 
         <footer className="border-t px-4 py-12 text-center text-sm text-muted-foreground md:px-8">
-          © {new Date().getFullYear()} World Portal. Built for travelers who like being in control.
+          © {new Date().getFullYear()} E-Embassy. Built for travelers who like being in control.
         </footer>
       </div>
   );
