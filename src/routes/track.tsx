@@ -8,13 +8,13 @@ import { ThemeToggle } from "@/components/theme-toggle";
 export const Route = createFileRoute("/track")({
   head: () => ({
     meta: [
-      { title: "Track Your Passport or Visa Application — World Portal" },
+      { title: "Track Your Passport or Visa Application — E-Embassy" },
       {
         name: "description",
         content:
-          "Enter your World Portal reference code to see exactly where your passport or visa application is, from submission to delivery.",
+          "Enter your E-Embassy reference code to see exactly where your passport or visa application is, from submission to delivery.",
       },
-      { property: "og:title", content: "Track Your Passport or Visa Application — World Portal" },
+      { property: "og:title", content: "Track Your Passport or Visa Application — E-Embassy" },
       {
         property: "og:description",
         content: "Live status updates for your travel document application, step by step.",

@@ -20,10 +20,10 @@ export const Route = createFileRoute("/auth")({
   }),
   head: () => ({
     meta: [
-      { title: "Sign in — World Portal" },
-      { name: "description", content: "Sign in to World Portal to plan and manage your trips." },
-      { property: "og:title", content: "Sign in — World Portal" },
-      { property: "og:description", content: "Sign in to World Portal." },
+      { title: "Sign in — E-Embassy" },
+      { name: "description", content: "Sign in to E-Embassy to plan and manage your trips." },
+      { property: "og:title", content: "Sign in — E-Embassy" },
+      { property: "og:description", content: "Sign in to E-Embassy." },
     ],
   }),
   component: AuthPage,

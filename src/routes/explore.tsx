@@ -12,9 +12,9 @@ import { ArrowLeft } from "lucide-react";
 export const Route = createFileRoute("/explore")({
   head: () => ({
     meta: [
-      { title: "Explore Destinations — World Portal" },
+      { title: "Explore Destinations — E-Embassy" },
       { name: "description", content: "Browse destinations, places to visit, flights, cars and stays — and build your trip basket piece by piece." },
-      { property: "og:title", content: "Explore Destinations — World Portal" },
+      { property: "og:title", content: "Explore Destinations — E-Embassy" },
       { property: "og:description", content: "Browse destinations, places to visit, flights, cars and stays — and build your trip basket piece by piece." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

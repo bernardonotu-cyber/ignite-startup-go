@@ -10,13 +10,13 @@ import { HireExplorer } from "@/components/travel/hire-explorer";
 export const Route = createFileRoute("/hire")({
   head: () => ({
     meta: [
-      { title: "Hire a Pro — Freelancers for Your Trip | World Portal" },
+      { title: "Hire a Pro — Freelancers for Your Trip | E-Embassy" },
       {
         name: "description",
         content:
           "Hire vetted photographers, videographers, private chefs, barbers, personal shoppers, interpreters, security, babysitters and event planners in your destination.",
       },
-      { property: "og:title", content: "Hire a Pro — Freelancers for Your Trip | World Portal" },
+      { property: "og:title", content: "Hire a Pro — Freelancers for Your Trip | E-Embassy" },
       {
         property: "og:description",
         content:
@@ -74,7 +74,7 @@ function HirePage() {
         </main>
 
         <footer className="border-t px-4 py-12 text-center text-sm text-muted-foreground md:px-8">
-          © {new Date().getFullYear()} World Portal. Built for travelers who like being in control.
+          © {new Date().getFullYear()} E-Embassy. Built for travelers who like being in control.
         </footer>
       </div>
   );

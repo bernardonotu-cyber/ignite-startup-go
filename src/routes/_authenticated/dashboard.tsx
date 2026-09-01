@@ -17,7 +17,7 @@ import type { Tables } from "@/integrations/supabase/types";
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
     meta: [
-      { title: "Your Trips — World Portal" },
+      { title: "Your Trips — E-Embassy" },
       { name: "description", content: "All your trips in one place." },
     ],
   }),
@@ -105,7 +105,7 @@ function Dashboard() {
         <div className="mb-8">
           <h1 className="text-3xl font-semibold tracking-tight">Your travel hub</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Everything World Portal does, one tap away.
+            Everything E-Embassy does, one tap away.
           </p>
         </div>
 

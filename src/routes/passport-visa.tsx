@@ -28,13 +28,13 @@ export const Route = createFileRoute("/passport-visa")({
   }),
   head: () => ({
     meta: [
-      { title: "Passport & Visa Services — World Portal" },
+      { title: "Passport & Visa Services — E-Embassy" },
       {
         name: "description",
         content:
           "Tell us where you're travelling from and to, and see instantly whether you need a visa or a passport — then apply and track it in one place.",
       },
-      { property: "og:title", content: "Passport & Visa Services — World Portal" },
+      { property: "og:title", content: "Passport & Visa Services — E-Embassy" },
       {
         property: "og:description",
         content:
@@ -218,7 +218,7 @@ function Page() {
       </main>
 
       <footer className="border-t px-4 py-12 text-center text-sm text-muted-foreground md:px-8">
-        © {new Date().getFullYear()} World Portal. Built for travelers who like being in control.
+        © {new Date().getFullYear()} E-Embassy. Built for travelers who like being in control.
       </footer>
     </div>
   );

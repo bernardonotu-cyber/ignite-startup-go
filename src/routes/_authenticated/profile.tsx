@@ -16,10 +16,10 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/_authenticated/profile")({
   head: () => ({
     meta: [
-      { title: "Your Profile — World Portal" },
-      { name: "description", content: "Manage your World Portal account details, name and avatar." },
-      { property: "og:title", content: "Your Profile — World Portal" },
-      { property: "og:description", content: "Manage your World Portal account details." },
+      { title: "Your Profile — E-Embassy" },
+      { name: "description", content: "Manage your E-Embassy account details, name and avatar." },
+      { property: "og:title", content: "Your Profile — E-Embassy" },
+      { property: "og:description", content: "Manage your E-Embassy account details." },
       { property: "og:type", content: "profile" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -89,7 +89,7 @@ function ProfilePage() {
           <ArrowLeft className="h-4 w-4" /> Back to dashboard
         </Link>
         <h1 className="text-3xl font-semibold tracking-tight">Your profile</h1>
-        <p className="mt-1 text-sm text-muted-foreground">Your account details across World Portal.</p>
+        <p className="mt-1 text-sm text-muted-foreground">Your account details across E-Embassy.</p>
 
         <Card className="mt-6 max-w-xl p-6">
           {loading ? (

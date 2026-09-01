@@ -11,7 +11,7 @@ import { ArrowLeft, MapPin, Calendar, Clock, DollarSign, Sparkles, Trash2 } from
 import type { Tables } from "@/integrations/supabase/types";
 
 export const Route = createFileRoute("/_authenticated/trips/$tripId")({
-  head: () => ({ meta: [{ title: "Trip — World Portal" }] }),
+  head: () => ({ meta: [{ title: "Trip — E-Embassy" }] }),
   component: TripDetail,
 });
 
