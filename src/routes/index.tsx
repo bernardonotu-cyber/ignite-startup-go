@@ -96,8 +96,7 @@ function Landing() {
               scrolled ? "text-foreground" : "bg-black/30 text-white backdrop-blur"
             }`}
           >
-            <Logo className="h-6 w-6" />
-            <span className="text-base font-semibold tracking-[0.14em]">World Portal</span>
+            <Logo className="h-7" />
           </div>
           <nav
             className={`hidden items-center gap-1 rounded-full px-2 py-1.5 text-sm transition-colors duration-500 md:flex ${

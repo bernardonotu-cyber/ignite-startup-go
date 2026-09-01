@@ -77,8 +77,7 @@ function Dashboard() {
       <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <Link to="/" className="flex items-center gap-2">
-            <Logo className="h-6 w-6" />
-            <span className="font-semibold">World Portal</span>
+            <Logo className="h-7" />
           </Link>
           <nav className="hidden items-center gap-1 text-sm md:flex">
             <Link to="/explore">
@@ -148,7 +147,7 @@ function Dashboard() {
           <p className="text-sm text-muted-foreground">Loading…</p>
         ) : trips.length === 0 ? (
           <Card className="flex flex-col items-center justify-center px-6 py-16 text-center">
-            <Logo className="h-10 w-10 opacity-50" />
+            <Logo className="h-10 opacity-50" />
             <h3 className="mt-4 text-lg font-semibold">No trips yet</h3>
             <p className="mt-1 max-w-sm text-sm text-muted-foreground">
               Create your first trip and let Vivid AI build a full itinerary in seconds.

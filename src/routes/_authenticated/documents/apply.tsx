@@ -104,8 +104,7 @@ function ApplyPage() {
       <header className="border-b py-3">
         <div className="mx-auto flex max-w-3xl items-center justify-between px-4">
           <Link to="/" className="press flex items-center gap-2">
-            <Logo className="h-6 w-6" />
-            <span className="text-base font-semibold tracking-[0.14em]">World Portal</span>
+            <Logo className="h-7" />
           </Link>
           <div className="flex items-center gap-2">
             <ThemeToggle />

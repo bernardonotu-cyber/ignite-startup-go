@@ -92,8 +92,7 @@ function Page() {
       <header className="sticky top-0 z-40 w-full border-b bg-background/80 py-2 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 md:px-8">
           <Link to="/" className="press flex items-center gap-2 rounded-full px-4 py-2">
-            <Logo className="h-6 w-6" />
-            <span className="text-base font-semibold tracking-[0.14em]">World Portal</span>
+            <Logo className="h-7" />
           </Link>
           <div className="flex items-center gap-2">
             <Link to="/hire" className="hidden sm:block">
