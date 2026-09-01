@@ -322,9 +322,9 @@ html.light {
 @utility text-gradient-warm {
   background-image: linear-gradient(
     100deg,
-    var(--sunset),
-    var(--mango) 45%,
-    var(--lagoon) 85%
+    var(--lagoon),
+    var(--grape) 45%,
+    var(--sunset) 90%
   );
   background-clip: text;
   color: transparent;
