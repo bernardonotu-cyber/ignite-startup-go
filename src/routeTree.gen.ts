@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WeatherRouteImport } from './routes/weather'
 import { Route as TrackRouteImport } from './routes/track'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as PassportVisaRouteImport } from './routes/passport-visa'
@@ -26,6 +27,11 @@ import { Route as AuthenticatedDocumentsApplyRouteImport } from './routes/_authe
 import { Route as AuthenticatedDocumentsReferenceRouteImport } from './routes/_authenticated/documents/$reference'
 import { Route as AuthenticatedAdminDocumentsRouteImport } from './routes/_authenticated/admin/documents'
 
+const WeatherRoute = WeatherRouteImport.update({
+  id: '/weather',
+  path: '/weather',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TrackRoute = TrackRouteImport.update({
   id: '/track',
   path: '/track',
@@ -119,6 +125,7 @@ export interface FileRoutesByFullPath {
   '/passport-visa': typeof PassportVisaRoute
   '/reset-password': typeof ResetPasswordRoute
   '/track': typeof TrackRoute
+  '/weather': typeof WeatherRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/admin/documents': typeof AuthenticatedAdminDocumentsRoute
@@ -136,6 +143,7 @@ export interface FileRoutesByTo {
   '/passport-visa': typeof PassportVisaRoute
   '/reset-password': typeof ResetPasswordRoute
   '/track': typeof TrackRoute
+  '/weather': typeof WeatherRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/admin/documents': typeof AuthenticatedAdminDocumentsRoute
@@ -155,6 +163,7 @@ export interface FileRoutesById {
   '/passport-visa': typeof PassportVisaRoute
   '/reset-password': typeof ResetPasswordRoute
   '/track': typeof TrackRoute
+  '/weather': typeof WeatherRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/admin/documents': typeof AuthenticatedAdminDocumentsRoute
@@ -174,6 +183,7 @@ export interface FileRouteTypes {
     | '/passport-visa'
     | '/reset-password'
     | '/track'
+    | '/weather'
     | '/dashboard'
     | '/profile'
     | '/admin/documents'
@@ -191,6 +201,7 @@ export interface FileRouteTypes {
     | '/passport-visa'
     | '/reset-password'
     | '/track'
+    | '/weather'
     | '/dashboard'
     | '/profile'
     | '/admin/documents'
@@ -209,6 +220,7 @@ export interface FileRouteTypes {
     | '/passport-visa'
     | '/reset-password'
     | '/track'
+    | '/weather'
     | '/_authenticated/dashboard'
     | '/_authenticated/profile'
     | '/_authenticated/admin/documents'
@@ -228,10 +240,18 @@ export interface RootRouteChildren {
   PassportVisaRoute: typeof PassportVisaRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   TrackRoute: typeof TrackRoute
+  WeatherRoute: typeof WeatherRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/weather': {
+      id: '/weather'
+      path: '/weather'
+      fullPath: '/weather'
+      preLoaderRoute: typeof WeatherRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/track': {
       id: '/track'
       path: '/track'
@@ -381,6 +401,7 @@ const rootRouteChildren: RootRouteChildren = {
   PassportVisaRoute: PassportVisaRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   TrackRoute: TrackRoute,
+  WeatherRoute: WeatherRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

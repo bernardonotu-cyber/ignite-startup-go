@@ -49,6 +49,7 @@ function ExplorePage() {
             <Link to="/passport-visa"><Button variant="ghost" className="press rounded-full">Passport & Visa</Button></Link>
             <Link to="/hire"><Button variant="ghost" className="press rounded-full">Hire a Pro</Button></Link>
             <Link to="/track"><Button variant="ghost" className="press rounded-full">Track</Button></Link>
+            <Link to="/weather" search={{ q: "" }}><Button variant="ghost" className="press rounded-full">Weather</Button></Link>
           </nav>
           <div className="flex items-center gap-2">
             <ThemeToggle />
