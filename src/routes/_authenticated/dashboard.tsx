@@ -10,7 +10,7 @@ import { TripBasketSheet } from "@/components/travel/trip-basket-sheet";
 import { Reveal } from "@/components/reveal";
 import { AccountMenu } from "@/components/account-menu";
 import {
-  Plus, MapPin, Calendar, Compass, BookUser, Briefcase, Radar, Sparkles, ArrowRight,
+  Plus, MapPin, Calendar, Compass, BookUser, Briefcase, Radar, Sparkles, ArrowRight, CloudSun,
 } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 
@@ -60,6 +60,13 @@ const QUICK_ACTIONS = [
     to: "/explore",
     tint: "bg-mango/20 text-mango",
   },
+  {
+    icon: CloudSun,
+    title: "Weather report",
+    body: "Live conditions and 7-day forecasts for any country.",
+    to: "/weather",
+    tint: "bg-grape/15 text-grape",
+  },
 ] as const;
 
 function Dashboard() {
@@ -91,6 +98,9 @@ function Dashboard() {
             </Link>
             <Link to="/track">
               <Button variant="ghost" className="press rounded-full">Track</Button>
+            </Link>
+            <Link to="/weather" search={{ q: "" }}>
+              <Button variant="ghost" className="press rounded-full">Weather</Button>
             </Link>
           </nav>
           <div className="flex items-center gap-2">

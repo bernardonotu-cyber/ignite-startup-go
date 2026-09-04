@@ -15,7 +15,8 @@ import { RequirementWizard } from "@/components/travel/requirement-wizard";
 
 import { DESTINATIONS } from "@/lib/travel-catalog";
 import { HeroPlane, ScrollPlane } from "@/components/travel/plane-flight";
-import { Sparkles, Plane, Car, Hotel, MapPin, Search, Compass, Ticket, ArrowRight } from "lucide-react";
+import { WeatherStrip } from "@/components/travel/weather-strip";
+import { Sparkles, Plane, Car, Hotel, MapPin, Search, Compass, Ticket, ArrowRight, CloudSun } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -106,6 +107,7 @@ function Landing() {
             {[
               { label: "Explore", id: "explore" },
               { label: "Moments", id: "moments" },
+              { label: "Weather", id: "weather" },
               { label: "Flights", id: "flights" },
 
               { label: "Cars", id: "cars" },
@@ -287,7 +289,18 @@ function Landing() {
         </div>
       </section>
 
-
+      {/* WEATHER */}
+      <section id="weather" className="mx-auto max-w-7xl scroll-mt-24 px-4 py-24 md:px-8">
+        <SectionHeader
+          eyebrow="Live · Weather"
+          title="Weather right now, everywhere you might go"
+          body="Real conditions across our destinations — tap any city to open the full forecast, or search any country on Earth."
+          tint="bg-lagoon/15 text-lagoon"
+        />
+        <Reveal>
+          <WeatherStrip />
+        </Reveal>
+      </section>
 
       {/* FLIGHTS */}
       <section id="flights" className="scroll-mt-24 bg-grape/5 py-24">

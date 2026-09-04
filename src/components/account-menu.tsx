@@ -13,7 +13,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import {
-  User, LogOut, FileText, Briefcase, Radar, Compass, Plus, ShieldCheck, LayoutDashboard, BookUser,
+  User, LogOut, FileText, Briefcase, Radar, Compass, Plus, ShieldCheck, LayoutDashboard, BookUser, CloudSun,
 } from "lucide-react";
 
 export function AccountMenu() {
@@ -79,6 +79,7 @@ export function AccountMenu() {
         <DropdownMenuItem asChild><Link to="/track"><Radar className="mr-2 h-4 w-4" /> Track application</Link></DropdownMenuItem>
         <DropdownMenuItem asChild><Link to="/hire"><Briefcase className="mr-2 h-4 w-4" /> Hire a pro</Link></DropdownMenuItem>
         <DropdownMenuItem asChild><Link to="/explore"><Compass className="mr-2 h-4 w-4" /> Explore</Link></DropdownMenuItem>
+        <DropdownMenuItem asChild><Link to="/weather" search={{ q: "" }}><CloudSun className="mr-2 h-4 w-4" /> Weather</Link></DropdownMenuItem>
         {isAdmin ? (
           <>
             <DropdownMenuSeparator />
