@@ -13,12 +13,10 @@ import { searchLocations, getWeather, type LocationResult } from "@/lib/weather.
 import { FEATURED_WEATHER } from "@/lib/weather-codes";
 import { CloudSun, Search, ArrowLeft } from "lucide-react";
 
-const searchSchema = z.object({
-  q: fallback(z.string(), "").default(""),
-});
-
 export const Route = createFileRoute("/weather")({
-  validateSearch: zodValidator(searchSchema),
+  validateSearch: (search: Record<string, unknown>) => ({
+    q: typeof search.q === "string" ? search.q : "",
+  }),
   head: () => ({
     meta: [
       { title: "Weather Report — E-Embassy" },
