@@ -55,6 +55,7 @@ export function WeatherStrip() {
       <div className="mt-5 flex justify-center">
         <Link
           to="/weather"
+          search={{ q: "" }}
           className="press inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
         >
           <CloudSun className="h-4 w-4" /> Search weather for any country
